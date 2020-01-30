@@ -4,8 +4,7 @@ const reviews = sequelize.define('review', {
     //attributes
     bookID: {
         primaryKey: true,
-        type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     userID: {
@@ -27,4 +26,4 @@ const reviews = sequelize.define('review', {
     },
 })
 
-export { reviews };
+export default reviews;

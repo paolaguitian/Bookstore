@@ -14,12 +14,16 @@ const orders = sequelize.define('order', {
         allowNull: false,
     },
     bookID: {
-
+        primaryKey: true,
+        type: DataTypes.STRING,
+        allowNull: false,
     },
     timeStamp: {
-
+        type: DataTypes.DATE,
+        allowNull: false,
     },
     total: {
-
+        type: DateTypes.DOUBLE,
+        allowNull: false,
     },
 })
