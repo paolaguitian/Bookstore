@@ -12,4 +12,6 @@ const books = sequelize.define('books', {
     releaseDate : DataTypes.STRING(25), 
     bookCover : DataTypes.STRING(255),
     publisher : DataTypes.STRING(50),
-})
+});
+
+export {books};
