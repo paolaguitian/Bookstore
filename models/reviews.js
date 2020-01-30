@@ -26,3 +26,5 @@ const reviews = sequelize.define('review', {
         allowNull: false,
     },
 })
+
+export { reviews };
