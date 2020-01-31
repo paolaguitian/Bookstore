@@ -1,4 +1,4 @@
-import sequelize, { DataTypes, Sequelize } from 'sequelize'
+import sequelize, { DataTypes, Sequelize } from 'sequelize';
 
 const creditCards = sequelize.define('creditCard', {
     userID: {
@@ -23,3 +23,5 @@ const creditCards = sequelize.define('creditCard', {
         allowNull: false,
     },
 })
+
+export default creditCards;
