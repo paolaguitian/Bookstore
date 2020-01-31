@@ -1,6 +1,6 @@
 import sequelize, { DataTypes, Sequelize } from 'sequelize';
 
-const books = sequelize.define('books', {
+const books = sequelize.define('book', {
     bookID: {
         primaryKey : true,
         type: DataTypes.STRING(20),
@@ -14,4 +14,4 @@ const books = sequelize.define('books', {
     publisher : DataTypes.STRING(50),
 });
 
-export {books};
+export default books;
