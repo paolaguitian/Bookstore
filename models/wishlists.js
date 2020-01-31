@@ -1,6 +1,6 @@
 import sequelize, { DataTypes, Sequelize } from 'sequelize';
 
-const wishlists = sequelize.define('wishlists', {
+const wishlists = sequelize.define('wishlist', {
     wishlistID: {
         primaryKey : true,
         type: DataTypes.UUID,
@@ -10,4 +10,4 @@ const wishlists = sequelize.define('wishlists', {
     name : DataTypes.STRING(32) 
 });
 
-export {wishlists};
+export default wishlists;
