@@ -7,17 +7,6 @@ const orders = sequelize.define('order', {
         default: sequelize.UUIDV4,
         allowNull: false,
     },
-    userID: {
-        primaryKey: true,
-        type: DataTypes.UUID,
-        default: sequelize.UUIDV4, 
-        allowNull: false,
-    },
-    bookID: {
-        primaryKey: true,
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
     timeStamp: {
         type: DataTypes.DATE,
         allowNull: false,
