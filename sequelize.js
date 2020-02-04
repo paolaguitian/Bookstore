@@ -1,5 +1,10 @@
 const Sequelize = require('sequelize')
 
+/*
+TODO: fix model --> requires to import reference:
+https://stackoverflow.com/questions/46677752/the-difference-between-requirex-and-import-x
+
+*/
 const AuthorModel = require('./models/authors')
 const BookModel = require('./models/books')
 const WishlistModel = require('./models/wishlists')
@@ -12,7 +17,7 @@ const ShippingAddressModel =  require('./models/shippingAddress')
 const CreditCardModel = require('./models/creditCards')
 
 
-const {DATABASE_NAME,ROOT,PASSWORD,HOST,DIALECT} =require('./constants')
+const { DATABASE_NAME,ROOT,PASSWORD,HOST,DIALECT } = require('./constants')
 
 const sequelize = new Sequelize(DATABASE_NAME, ROOT, PASSWORD,
   {host: HOST,dialect: DIALECT,pool: {max: 10,min: 0,acquire: 30000,idle: 10000}})
