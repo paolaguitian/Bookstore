@@ -8,8 +8,9 @@ const books = sequelize.define('book', {
     },
     genre : DataTypes.STRING(20),
     sales : DataTypes.INTEGER,
+    quantity : DataTypes.INTEGER,
     title : DataTypes.STRING(255),
-    releaseDate : DataTypes.STRING(25), 
+    releaseDate : DataTypes.DATAONLY, 
     bookCover : DataTypes.STRING(255),
     publisher : DataTypes.STRING(50),
 });
