@@ -7,7 +7,10 @@ const wishlists = sequelize.define('wishlist', {
         defaultValue : Sequelize.UUIDV4,
         allowNull : false
     },
-    name : DataTypes.STRING(32) 
+    name : {
+	type : DataTypes.STRING(32),
+	allowNull : false
+    }
 });
 
 export default wishlists;
