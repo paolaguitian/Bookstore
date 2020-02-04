@@ -6,13 +6,28 @@ const books = sequelize.define('book', {
         type: DataTypes.STRING(20),
         allowNull: false
     },
-    genre : DataTypes.STRING(20),
-    sales : DataTypes.INTEGER,
-    quantity : DataTypes.INTEGER,
-    title : DataTypes.STRING(255),
-    releaseDate : DataTypes.DATEONLY, 
-    bookCover : DataTypes.STRING(255),
-    publisher : DataTypes.STRING(50),
+    genre : {
+	type : DataTypes.STRING(20)
+    },
+    sales : {
+	type: DataTypes.INTEGER
+    },
+    quantity : {
+	type: DataTypes.INTEGER
+    },
+    title : {
+	allowNull : false,
+	type : DataTypes.STRING(20)
+    },
+    releaseDate : {
+        type: DataTypes.DATEONLY
+    },
+    bookCover : {
+	type : DataTypes.STRING(500)
+    },
+    publisher : {
+	type: DataTypes.STRING(50)
+    }
 });
 
 export default books;
