@@ -29,3 +29,27 @@ const ShippingAddress = ShippingAddressModel(sequelize, Sequelize)
 const CreditCard = CreditCardModel(sequelize, Sequelize)
 
 //Associations
+Author.hasMany(Book);
+Book.hasOne(Author);
+//TODO: Book.hasMany(Wishlist);
+//TODO: Wishlist.hasMany(Book);
+
+Book.hasMany(Review);
+Review.hasOne(Book);
+//TODO DEFINE FOREIGN KEY
+
+User.hasMany(Review);
+Review.hasOne(User);
+User.hasMany
+
+// Export models
+module.exports = {
+  Book,
+  Author,
+  Wishlist,
+  Order,
+  Review,
+  User,
+  ShippingAddress,
+  CreditCard
+}
