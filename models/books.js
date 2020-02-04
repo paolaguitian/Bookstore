@@ -10,7 +10,7 @@ const books = sequelize.define('book', {
     sales : DataTypes.INTEGER,
     quantity : DataTypes.INTEGER,
     title : DataTypes.STRING(255),
-    releaseDate : DataTypes.DATAONLY, 
+    releaseDate : DataTypes.DATEONLY, 
     bookCover : DataTypes.STRING(255),
     publisher : DataTypes.STRING(50),
 });
