@@ -1,4 +1,4 @@
-import sequelize, { DataTypes, Sequelize } from 'sequelize';
+import sequelize, { DataTypes } from 'sequelize';
 
 const creditCards = sequelize.define('creditCard', {
     //maximum card size is 19 digits

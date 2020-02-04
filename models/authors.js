@@ -22,3 +22,5 @@ const authors = sequelize.define('author', {
     allowNull: false,
   },
 })
+
+export default authors;
