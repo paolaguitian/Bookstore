@@ -45,7 +45,12 @@ Review.hasOne(Book);
 
 User.hasMany(Review);
 Review.hasOne(User);
-User.hasMany
+User.hasMany(Review);
+
+User.hasMany(ShippingAddress);
+User.hasMany(CreditCard, {foreignKey: ''});
+ShippingAddress.belongsTo(User);
+CreditCard.belongsTo(User);
 
 // Export models
 module.exports = {
