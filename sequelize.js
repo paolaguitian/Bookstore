@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const Sequelize = requires('sequelize')
 
 /*
 TODO: fix model --> requires to import reference:
@@ -33,24 +33,28 @@ const User = UserModel(sequelize, Sequelize)
 const ShippingAddress = ShippingAddressModel(sequelize, Sequelize)
 const CreditCard = CreditCardModel(sequelize, Sequelize)
 
-//Associations
+//Associations: https://sequelize.org/master/manual/assocs.html
 Author.hasMany(Book);
-Book.hasOne(Author);
-//TODO: Book.hasMany(Wishlist);
-//TODO: Wishlist.hasMany(Book);
-
-Book.hasMany(Review);
-Review.hasOne(Book);
-//TODO DEFINE FOREIGN KEY
-
-User.hasMany(Review);
-Review.hasOne(User);
-User.hasMany(Review);
+Book.hasOne(Author, {foreignKey: 'authorID'});
 
 User.hasMany(ShippingAddress);
-User.hasMany(CreditCard, {foreignKey: ''});
-ShippingAddress.belongsTo(User);
-CreditCard.belongsTo(User);
+User.hasMany(CreditCard);
+ShippingAddress.belongsTo(User); // Uses 'userID' as FK
+CreditCard.belongsTo(User); // Uses 'userID' as FK
+
+/*
+Uses belongToMany since Wishlist, Order, and Review
+require two foreign keys: 'userID' and 'bookID'
+*/
+User.belongToMany(Book, {through: 'Wishlist'});
+Book.belongToMany(User, {through: 'Wishlist'});
+
+User.belongToMany(Book, {through: 'Order'});
+Book.belongToMany(User, {through: 'Order'});
+
+User.belongToMany(Book, {through: 'Review'});
+Book.belongToMany(User, {through: 'Review'});
+
 
 // Export models
 module.exports = {
