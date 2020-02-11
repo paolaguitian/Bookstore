@@ -1,22 +1,13 @@
 const Sequelize = requires('sequelize')
 
-/*
-TODO: fix model --> requires to import reference:
-https://stackoverflow.com/questions/46677752/the-difference-between-requirex-and-import-x
-
-*/
-
-import authors from '../models/authors'
+import authors from './models/authors'
 import books from './models/books'
 import wishlists from './models/wishlists'
-
 import orders from './models/orders'
 import reviews from './models/reviews'
-
 import users from './models/users'
 import shippingAddress from './models/shippingAddress'
 import creditCards from './models/creditCards'
-
 
 const { DATABASE_NAME,ROOT,PASSWORD,HOST,DIALECT } = require('./constants')
 
@@ -35,13 +26,18 @@ const ShippingAddress = shippingAddress(sequelize, Sequelize)
 const CreditCard = creditCards(sequelize, Sequelize)
 
 //Associations: https://sequelize.org/master/manual/assocs.html
+
+//One to Many - Author has many Books - Books have one author (Books has a FK of authorID)
 Author.hasMany(Book);
 Book.belongsTo(Author);
 
+//One to Many - User has many Shipping Addresses - Shipping Addresses has one User
 User.hasMany(ShippingAddress);
+ShippingAddress.belongsTo(User); //S.A has FK of userID
+
 User.hasMany(CreditCard);
-ShippingAddress.belongsTo(User); // Uses 'userID' as FK
-CreditCard.belongsTo(User); // Uses 'userID' as FK
+CreditCard.belongsTo(User); // CC has a FK of userID
+
 
 /*
 Uses belongToMany since Wishlist, Order, and Review
