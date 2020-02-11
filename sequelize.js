@@ -5,16 +5,17 @@ TODO: fix model --> requires to import reference:
 https://stackoverflow.com/questions/46677752/the-difference-between-requirex-and-import-x
 
 */
-const AuthorModel = require('./models/authors')
-const BookModel = require('./models/books')
-const WishlistModel = require('./models/wishlists')
 
-const OrderModel = require('./models/orders')
-const ReviewModel = require('./models/reviews')
+import authors from '../models/authors'
+import books from './models/books'
+import wishlists from './models/wishlists'
 
-const UserModel = require('./models/users')
-const ShippingAddressModel =  require('./models/shippingAddress')
-const CreditCardModel = require('./models/creditCards')
+import orders from './models/orders'
+import reviews from './models/reviews'
+
+import users from './models/users'
+import shippingAddress from './models/shippingAddress'
+import creditCards from './models/creditCards'
 
 
 const { DATABASE_NAME,ROOT,PASSWORD,HOST,DIALECT } = require('./constants')
@@ -24,14 +25,14 @@ const sequelize = new Sequelize(DATABASE_NAME, ROOT, PASSWORD,
 
 
 //Models
-const Book = BookModel(sequelize, Sequelize)
-const Author = AuthorModel(sequelize, Sequelize)
-const Wishlist = WishlistModel(sequelize, Sequelize)
-const Order = OrderModel(sequelize, Sequelize)
-const Review = ReviewModel(sequelize, Sequelize)
-const User = UserModel(sequelize, Sequelize)
-const ShippingAddress = ShippingAddressModel(sequelize, Sequelize)
-const CreditCard = CreditCardModel(sequelize, Sequelize)
+const Book = books(sequelize, Sequelize)
+const Author = authors(sequelize, Sequelize)
+const Wishlist = wishlists(sequelize, Sequelize)
+const Order = orders(sequelize, Sequelize)
+const Review = reviews(sequelize, Sequelize)
+const User = users(sequelize, Sequelize)
+const ShippingAddress = shippingAddress(sequelize, Sequelize)
+const CreditCard = creditCards(sequelize, Sequelize)
 
 //Associations: https://sequelize.org/master/manual/assocs.html
 Author.hasMany(Book);
@@ -55,6 +56,10 @@ Book.belongToMany(User, {through: 'Order'});
 User.belongToMany(Book, {through: 'Review'});
 Book.belongToMany(User, {through: 'Review'});
 
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log(`DB created.`)
+  })
 
 // Export models
 module.exports = {
