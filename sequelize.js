@@ -47,14 +47,14 @@ CreditCard.belongsTo(User); // Uses 'userID' as FK
 Uses belongToMany since Wishlist, Order, and Review
 require two foreign keys: 'userID' and 'bookID'
 */
-User.belongToMany(Book, {through: 'Wishlist'});
-Book.belongToMany(User, {through: 'Wishlist'});
+User.belongToMany(Book, {through: Wishlist});
+Book.belongToMany(User, {through: Wishlist});
 
-User.belongToMany(Book, {through: 'Order'});
-Book.belongToMany(User, {through: 'Order'});
+User.belongToMany(Book, {through: Order});
+Book.belongToMany(User, {through: Order});
 
-User.belongToMany(Book, {through: 'Review'});
-Book.belongToMany(User, {through: 'Review'});
+User.belongToMany(Book, {through: Review});
+Book.belongToMany(User, {through: Review});
 
 sequelize.sync({ force: false })
   .then(() => {
