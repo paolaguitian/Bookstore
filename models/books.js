@@ -1,3 +1,5 @@
+import sequelize, { DataTypes } from 'sequelize';
+
 const books = sequelize.define('book', {
     bookID: {
         primaryKey : true,

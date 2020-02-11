@@ -1,4 +1,4 @@
-import sequelize, { DataTypes, Sequelize } from 'sequelize';
+import sequelize, { DataTypes } from 'sequelize';
 
 const orders = sequelize.define('order', {
     orderID: {
