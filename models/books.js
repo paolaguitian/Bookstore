@@ -1,30 +1,32 @@
+import sequelize, { DataTypes } from 'sequelize';
+
 const books = sequelize.define('book', {
     bookID: {
-        primaryKey : true,
+    primaryKey : true,
         type: DataTypes.STRING(20),
         allowNull: false
     },
     genre : {
-	type : DataTypes.STRING(20)
+	    type : DataTypes.STRING(20)
     },
     sales : {
-	type: DataTypes.INTEGER
+	    type: DataTypes.INTEGER
     },
     quantity : {
-	type: DataTypes.INTEGER
+	    type: DataTypes.INTEGER
     },
     title : {
-	allowNull : false,
-	type : DataTypes.STRING(255)
+	    allowNull : false,
+	    type : DataTypes.STRING(255)
     },
     releaseDate : {
         type: DataTypes.DATEONLY
     },
     bookCover : {
-	type : DataTypes.STRING(500)
+	    type : DataTypes.STRING(500)
     },
     publisher : {
-	type: DataTypes.STRING(50)
+	    type: DataTypes.STRING(50)
     }
 });
 
