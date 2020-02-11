@@ -36,7 +36,7 @@ const CreditCard = creditCards(sequelize, Sequelize)
 
 //Associations: https://sequelize.org/master/manual/assocs.html
 Author.hasMany(Book);
-Book.hasOne(Author, {foreignKey: 'authorID'});
+Book.belongsTo(Author);
 
 User.hasMany(ShippingAddress);
 User.hasMany(CreditCard);
