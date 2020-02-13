@@ -1,17 +1,17 @@
-import sequelize, { DataTypes } from 'sequelize';
-
-const reviews = sequelize.define('review', {
-    timeStamp: {
-        type: DataTypes.DATE,
-        allowNull: false,
-    },
-    comment: {
-        type: DataTypes.TEXT,
-    },
-    rating: {
-        type: DataTypes.DOUBLE,
-        allowNull: false,
-    },
-})
+const reviews = (sequelize, type) => {
+    return sequelize.define('review', {
+        timeStamp: {
+            type: type.DATE,
+            allowNull: false,
+        },
+        comment: {
+            type: type.TEXT,
+        },
+        rating: {
+            type: type.DOUBLE,
+            allowNull: false,
+        },
+    })
+}
 
 export default reviews;

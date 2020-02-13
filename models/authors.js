@@ -1,26 +1,26 @@
-
-import sequelize, { DataTypes, Sequelize } from 'sequelize';
-
-const authors = sequelize.define('author', {
-  //attribute
-  authorID: {
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false,
-  },
-  firstName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  lastName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  bio: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-})
+//const Sequelize = require('Sequelize');
+const authors = (sequelize, type) => {
+  return sequelize.define('author', {
+    //attribute
+    authorID: {
+      primaryKey: true,
+      type: type.UUID,
+      defaultValue: type.UUIDV4,
+      allowNull: false,
+    },
+    firstName: {
+      type: type.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: type.STRING,
+      allowNull: false,
+    },
+    bio: {
+      type: type.TEXT,
+      allowNull: false,
+    },
+  })
+}
 
 export default authors;

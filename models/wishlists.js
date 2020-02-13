@@ -1,16 +1,22 @@
-import sequelize, { DataTypes, Sequelize } from 'sequelize';
+//import sequelize, { DataTypes, Sequelize } from 'sequelize';
 
-const wishlists = sequelize.define('wishlist', {
-    wishlistID: {
-        primaryKey : true,
-        type: DataTypes.UUID,
-        defaultValue : Sequelize.UUIDV4,
-        allowNull : false
-    },
-    name : {
-	type : DataTypes.STRING(32),
-	allowNull : false
-    }
-});
+const wishlists = (sequelize, type) => { 
+    return sequelize.define('wishlist', {
+        wishlistID: {
+            primaryKey : true,
+            type: type.UUID,
+            defaultValue : type.UUIDV4,
+            allowNull : false
+        },
+        name : {
+            type : type.STRING(32),
+            allowNull : false
+        },
+        wishlistNum : {
+            type: type.INTEGER,
+            allowNull : false
+        }
+    });
+}
 
 export default wishlists;
