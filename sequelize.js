@@ -1,4 +1,12 @@
-const Sequelize = require('sequelize')
+
+/*
+TODO: This file is not necessary anymore. Associations were defined inside 
+of the model declarations and the 'db' sequelize instance was moved to /models/index.js.
+Also, db.authenticate and db.sync were moved to server.js
+*/
+
+
+/*const Sequelize = require('sequelize')
 
 import authors from './models/authors'
 import books from './models/books'
@@ -10,7 +18,7 @@ import shippingAddress from './models/shippingAddress'
 import creditCards from './models/creditCards'
 
 
-const {DATABASE_NAME,USERNAME,PASSWORD,HOST,DIALECT} =require('./constants')
+const {DATABASE_NAME,USERNAME,PASSWORD,HOST,DIALECT} =require('./config/constants')
 const db = new Sequelize(DATABASE_NAME, USERNAME, PASSWORD, {
   host: HOST,
   dialect: DIALECT,
@@ -46,6 +54,7 @@ Uses belongToMany since Wishlist, Order, and Review
 require two foreign keys: 'userID' and 'bookID'
 */
 
+/*
 User.belongsToMany(Book, {through: Wishlist});
 Book.belongsToMany(User, {through: Wishlist});
 
@@ -54,7 +63,7 @@ Book.belongsToMany(User, {through: Order});
 
 User.belongsToMany(Book, {through: Review});
 Book.belongsToMany(User, {through: Review});
-
+*/
 
 //Moved to server.js
 /*db
@@ -72,7 +81,7 @@ db.sync({ force: false })
   })
 */
 
-export default db;
+//export default db;
 
 
 // Export models

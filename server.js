@@ -1,10 +1,21 @@
-import db from './sequelize'
-import express from 'express'
-
+import express from 'express';
+import models, {db} from './models';
+import routes from './routes';
 
 const app = express()
+
+const PORT = process.env.PORT || 3001
+
 app.use(express.json())
-//app.use('/api/books', require('./routes/bookR'))
+app.use((req, res, next) => {
+  req.context = {models};
+  next();
+});
+
+
+// Routes
+
+app.use('/api/books', routes.bookR);
 
 //Authenticates and setup db
 db.authenticate()
@@ -15,12 +26,12 @@ db.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-/*db.sync({ force: false })
+db.sync({ force: false })
   .then(() => {
     console.log(`DB created.`)
+    app.listen(PORT, () => {console.log(`Running on http://localhost:${PORT}`)})
   })
-*/
 
-const PORT = process.env.PORT || 3001
-    app.listen(PORT, () => {console.log(`Running on http://localhost:${PORT}`)
-})
+
+
+    

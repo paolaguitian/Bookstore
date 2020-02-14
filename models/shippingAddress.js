@@ -1,6 +1,6 @@
 
 const shippingAddress = (sequelize, type) => { 
-  return sequelize.define('shippingAddress', {
+  const ShippingAddress =  sequelize.define('shippingAddress', {
       //attribute
       street: {
         type: type.STRING,
@@ -23,6 +23,12 @@ const shippingAddress = (sequelize, type) => {
         allowNull: false,
       },
     });
+
+    ShippingAddress.associate = models => {
+      ShippingAddress.belongsTo(models.User);
+    };
+
+    return ShippingAddress;
 }
 
 export default shippingAddress;

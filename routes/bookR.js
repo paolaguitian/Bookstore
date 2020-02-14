@@ -1,16 +1,11 @@
-import express from 'express';
-//import db from '../sequelize';
-//import books from '../models/books';
+import {Router} from 'express';
+const router = Router();
 
-const router = express.Router();
 
-router.get('/', (req, res) => {
-    Book.findAll()
-        .then(books => {
-            console.log(gigs);
-            res.sendStatus(200);
-        })
-        .catch(err => console.log(err))
+router.get('/', async (req, res) => {
+    const allBooks = await req.context.models.Book.findAll();
+    return res.json(allBooks);
 });
 
-module.exports = router;
+
+export default router;

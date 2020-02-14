@@ -1,4 +1,8 @@
-const DATABASE_NAME='bookstoretest';
+/*
+TODO: This file was moved to /config, and is therefore pending deletion.
+*/
+
+/*const DATABASE_NAME='bookstoretest';
 const USERNAME='root';
 const PASSWORD='';
 const HOST='localhost';
@@ -10,4 +14,4 @@ module.exports = {
     PASSWORD:PASSWORD,
     HOST:HOST,
     DIALECT:DIALECT
-}
+}*/

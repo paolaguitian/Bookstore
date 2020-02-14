@@ -1,5 +1,5 @@
 const reviews = (sequelize, type) => {
-    return sequelize.define('review', {
+    const Review =  sequelize.define('review', {
         timeStamp: {
             type: type.DATE,
             allowNull: false,
@@ -12,6 +12,8 @@ const reviews = (sequelize, type) => {
             allowNull: false,
         },
     })
+
+    return Review;
 }
 
 export default reviews;

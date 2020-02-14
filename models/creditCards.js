@@ -1,5 +1,5 @@
 const creditCards = (sequelize, type) => { 
-    return sequelize.define('creditCard', {
+    const CreditCard = sequelize.define('creditCard', {
         //maximum card size is 19 digits
         cardNumber: {
             type: type.STRING,
@@ -15,7 +15,13 @@ const creditCards = (sequelize, type) => {
             type: type.STRING(7),
             allowNull: false,
         },
-    })
-}
+    });
+
+    CreditCard.associate = models => {
+        CreditCard.belongsTo(models.User);
+    };
+
+    return CreditCard;
+};
 
 export default creditCards;

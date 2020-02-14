@@ -1,7 +1,5 @@
-//import sequelize, { DataTypes, Sequelize } from 'sequelize';
-
 const wishlists = (sequelize, type) => { 
-    return sequelize.define('wishlist', {
+    const Wishlist = sequelize.define('wishlist', {
         wishlistID: {
             primaryKey : true,
             type: type.UUID,
@@ -17,6 +15,8 @@ const wishlists = (sequelize, type) => {
             allowNull : false
         }
     });
+
+    return Wishlist;
 }
 
 export default wishlists;

@@ -1,5 +1,5 @@
 const orders = (sequelize, type) => {
-    return sequelize.define('order', {
+    const Order =  sequelize.define('order', {
         orderID: {
             primaryKey: true,
             type: type.UUID,
@@ -15,6 +15,8 @@ const orders = (sequelize, type) => {
             allowNull: false,
         },
     })
+    
+    return Order;
 }
 
 export default orders;

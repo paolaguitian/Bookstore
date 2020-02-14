@@ -1,5 +1,5 @@
 const users = (sequelize, type) => {
-  return sequelize.define('user', {
+  const User = sequelize.define('user', {
     //attributes
     userID: {
       primaryKey: true,
@@ -34,6 +34,16 @@ const users = (sequelize, type) => {
       type: type.STRING,
     },
   });
+
+  User.associate = models => {
+    User.hasMany(models.ShippingAddress);
+    User.hasMany(models.CreditCard);
+    User.belongsToMany(models.Book, {through: models.Wishlist});
+    User.belongsToMany(models.Book, {through: models.Order});
+    User.belongsToMany(models.Book, {through: models.Review});
+  };
+
+  return User;
 }
 
 export default users;

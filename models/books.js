@@ -1,5 +1,5 @@
 const books = (sequelize, type) => {
-    return sequelize.define('book', {
+    const Book =  sequelize.define('book', {
         bookID: {
             primaryKey : true,
             type: type.STRING(20),
@@ -28,6 +28,15 @@ const books = (sequelize, type) => {
         type: type.STRING(50)
         }
     });
+
+    Book.associate = models => {
+        Book.belongsTo(models.Author);
+        Book.belongsToMany(models.User, {through: models.Wishlist});
+        Book.belongsToMany(models.User, {through: models.Order});
+        Book.belongsToMany(models.User, {through: models.Review});
+    }
+
+    return Book;
 }
 
 export default books;
