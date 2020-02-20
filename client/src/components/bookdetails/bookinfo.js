@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 class BookInfo extends Component {
   constructor() {
@@ -10,12 +10,17 @@ class BookInfo extends Component {
 
   componentDidMount() {
     fetch('/api/books')
+    //img url. author, year nblah
       .then(res => res.json)
-      .then(allBooks => this.setState({allBooks}, () => console.log(allBooks)))
+      .then(allBooks => this.setState({ allBooks }, () => console.log(allBooks)))
   }
 
   render () {
     return (
+      // const { image, author} = this.state.allbooks;
+      //loop through this.state.allbooks : <img src={image}>  </img>
+      // <h1>{this.state.allbooks.author}</h1>
+      
       <div>
         <h1>Books</h1>
       </div>
@@ -24,4 +29,3 @@ class BookInfo extends Component {
 }
  
 export default BookInfo;
-
