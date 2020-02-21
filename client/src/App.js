@@ -4,7 +4,8 @@ import { BrowserRouter as Router,
   Route,
   Link
 } from "react-router-dom";
-import Home from './views/home';
+import Home from './views/home/home';
+import './App.css'
 
 class App extends Component {
   render () {

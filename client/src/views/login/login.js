@@ -5,7 +5,7 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <Button type="dashed" icon="user" size="normal">
+        <Button type="dashed" icon="user" size="default">
           Hello, Sign In
         </Button>
       </div>
