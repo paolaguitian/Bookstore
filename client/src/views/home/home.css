@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.divider {
+  width: 80%;
+  height: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgb(52, 98, 80, 0.8);
+  border: 0 none;
+  margin-bottom: 9px;
+}
+
+.topBar {
+  display: flex;
+  color: #1890ff;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: x-large;
+}
+
+.booksBar {
+  display: flex;
+  justify-content: space-evenly;
+}

@@ -1,18 +1,24 @@
-import React, { Component, Fragment } from 'react';
-import BookInfo from './components/bookdetails/bookinfo.js'
+import React, { Component } from 'react';
+import { BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './views/home';
 
 class App extends Component {
-  
   render () {
     return (
-      <Fragment>     
-        {/*Was used to test if react and express are connected by fetching /api/books
-        when <BookInfo /> component mounts.*/}   
-      
-        
-        {/* <Home /> */}
-        <BookInfo />
-      </Fragment>
+      <Router>
+        <div>
+          <Link to="/"/>
+           <Switch>
+             <Route path="/">
+                 <Home/>
+             </Route>
+           </Switch>
+        </div>
+      </Router>
     );
   }
 }
