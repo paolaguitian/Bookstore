@@ -1,0 +1,14 @@
+.bookCard {
+    width: 15em;
+    display: block;
+}
+
+.bookCover {
+    height: 16em;
+    width: 12em;
+}
+
+.infoTag {
+    font-style: italic;
+    color: grey;
+}
