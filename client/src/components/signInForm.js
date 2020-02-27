@@ -48,13 +48,8 @@ class SignIn extends Component {
             Log in
           </Button>
           <div>
-            <p>Don't Have An Account?</p>
-            <Button
-              type="link"
-              size="small"
-              onClick={this.props.switchView}>
-              Sign Up
-            </Button>
+            Don't Have An Account? Join Us
+            <Icon type="usergroup-add" onClick={this.props.switchView} />
           </div>
         </Form.Item>
       </Form>

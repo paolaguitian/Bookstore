@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Icon } from 'antd';
 
 
 class Register extends Component {
@@ -68,6 +68,18 @@ class Register extends Component {
 
     return (
       <Form {...formItemLayout} onSubmit={this.handleSubmit}>
+        <Form.Item label="First Name">
+          {getFieldDecorator('firstName', {
+            rules: [{ required: true, message: 'Please input your first name!',},],
+          })(<Input />)}
+        </Form.Item>
+
+        <Form.Item label="Last Name">
+          {getFieldDecorator('lastName', {
+            rules: [{ required: true, message: 'Please input your last name!',},],
+          })(<Input />)}
+        </Form.Item>
+
         <Form.Item label="E-mail">
           {getFieldDecorator('email', {
             rules: [
@@ -82,6 +94,7 @@ class Register extends Component {
             ],
           })(<Input />)}
         </Form.Item>
+
         <Form.Item label="Password" hasFeedback>
           {getFieldDecorator('password', {
             rules: [
@@ -95,6 +108,7 @@ class Register extends Component {
             ],
           })(<Input.Password />)}
         </Form.Item>
+
         <Form.Item label="Confirm Password" hasFeedback>
           {getFieldDecorator('confirm', {
             rules: [
@@ -109,14 +123,24 @@ class Register extends Component {
           })(<Input.Password onBlur={this.handleConfirmBlur} />)}
         </Form.Item>
 
+        <Form.Item label="Home Address">
+          {getFieldDecorator('homeAddress', {
+            rules: [{ required: true, message: 'Please input your home address!',},],
+          })(<Input />)}
+        </Form.Item>
+
+        <Form.Item label="Phone Number">
+          {getFieldDecorator('phoneNumber', {
+            rules: [{ required: true, message: 'Please input your phone number!',},],
+          })(<Input />)}
+        </Form.Item>
+
         <Form.Item {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">
             Register
           </Button>
-          <Button type="primary" onClick={this.props.switchView}>
-            Cancel
-          </Button>
         </Form.Item>
+        <Icon type="arrow-left" onClick={this.props.switchView}/>
       </Form>
     );
   }
