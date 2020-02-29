@@ -1,11 +1,19 @@
 .bookCard {
-    width: 15em;
     display: block;
+    width: 240px;
+    text-align: left;
+}
+
+.bookCard img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bookCover {
     height: 16em;
     width: 12em;
+    margin-bottom: 50px;
 }
 
 .infoTag {

@@ -14,8 +14,7 @@ class App extends Component {
         <div>
           <Link to="/"/>
            <Switch>
-             <Route path="/">
-                 <Home/>
+             <Route path="/" component={Home}>
              </Route>
            </Switch>
         </div>
