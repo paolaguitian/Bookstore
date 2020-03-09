@@ -1,0 +1,51 @@
+.bookDetails {
+    width: 70%;
+    display: inline-block;
+    justify-content: space-evenly;
+}
+
+.bookDetailsCover {
+    float: left;
+}
+
+.bookDetailsCover img {
+    display: block;
+    height: 40vh;
+    width: 17em;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bookDetailsCover img:hover {
+    cursor: zoom-in;
+    opacity: 0.7;
+}
+
+.bookInfo {
+    float:right;
+}
+
+.bookInfo button {
+    float:right;
+    align-self: flex-end;
+}
+
+.inStockStatus {
+    color: green;
+}
+
+.lowStockStatus {
+    color: orangered;
+}
+
+.outOfStockStatus {
+    color: red;
+}
+
+.bookDetailsTable {
+    width: 70%;
+    display: inline-block;
+    justify-content: space-evenly;
+    padding: 100px;
+}

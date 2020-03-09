@@ -1,0 +1,35 @@
+.homeContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    align-items: center;
+    text-align: center;
+}
+
+.pagination {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px 10px;
+    width: 100%;
+}
+  
+.pagination li {
+    display: inline-table;
+}
+
+.pagination li a {
+    display: inline-table;
+    color:#303030;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.pagination li a:hover {
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.pagination li a:active {
+    background-color: cornflowerblue;
+    color: white;
+}

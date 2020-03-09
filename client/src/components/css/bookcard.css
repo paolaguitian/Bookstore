@@ -1,0 +1,32 @@
+.bookCard {
+    width: 240px;
+    display: inline-block;
+    justify-content: space-evenly;
+    text-align: left;
+}
+
+.bookCard img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bookCard .bookPageLink {
+    text-align: center;
+    display: inline-block;
+}
+
+.bookCover {
+    height: 16em;
+    width: 12em;
+    margin-bottom: 30px;
+}
+
+.infoTag {
+    font-style: italic;
+    color: grey;
+}
+
+.authorTag {
+    color: grey;
+    text-align: left;
+}

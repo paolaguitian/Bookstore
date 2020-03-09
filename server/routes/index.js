@@ -3,7 +3,8 @@
 */
 
 import bookR from './bookR';
+import authorR from './authorR';
 
 export default {
-  bookR
+  bookR, authorR
 };
