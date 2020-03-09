@@ -1,45 +1,47 @@
 import React, { Component } from 'react';
-import BookCard from './bookcard.js';
 import { Link } from 'react-router-dom'
 import { List } from 'antd'
-import './homebooks.css';
+import BookCard from '../bookcard.js';
+import '../css/bookcatalog.css';
+import AuthorName from './authorname'
 
-class HomeBooks extends Component {
+class AuthorCatalog extends Component {
   constructor(props) {
     super(props)
+    /*This class can be passed a api url as a props to 
+    determine how the catalog of books is sorted*/
     this.state = {
       pager: {},
       pageOfBooks : []
     }
   }
 
-  getPageofBooks = () => {
+  getPageofAuthorBooks = (authorID) => {
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get('page')) || 1;
     if (page !== this.state.pager.currentPage) {
-      fetch(`/api/books/all?page=${page}`, {method : 'GET'})
+      fetch(`/api/books/authorbooks/${authorID}?page=${page}`, {method : 'GET'})
         .then(res => res.json())
-        .then(({pager, pageOfBooks}) => this.setState({pager, pageOfBooks}, () => console.log()))
+        .then(({pager, pageOfBooks}) => this.setState({pager, pageOfBooks}, () => console.log(pageOfBooks)))
     }
   }
 
   componentDidMount() {
-    this.getPageofBooks();
+    this.getPageofAuthorBooks(this.props.match.params.authorID);
   }
 
-  componentDidUpdate() {
-    this.getPageofBooks()
+  componentDidUpdate(prevProps) {
+    if(this.props.match.params.authorID !== prevProps.match.params.authorID) {
+      this.getPageofAuthorBooks(this.props.match.params.authorID)
+    }
   }
-
-  /*{pageOfBooks.map((book) => ( 
-    <BookCard key={book.bookID} bookID={book.bookID} />
-  ))}*/
 
   render () {
     const {pager, pageOfBooks} = this.state
 
     return (
       <div className="homeContainer">
+        <AuthorName authorAuthorID={this.props.match.params.authorID} />
         <div>
           <List
             grid={{
@@ -53,12 +55,13 @@ class HomeBooks extends Component {
             }}
             dataSource={pageOfBooks}
             renderItem={book => (
-            <List.Item>
-              <BookCard key={book.bookID} bookID={book.bookID} />
-            </List.Item>
+              <List.Item>
+                <BookCard key={book.bookID} bookID={book.bookID} page={pager.currentPage}/>
+              </List.Item>
             )}
           />  
         </div>
+        {/*<Route path={`?page=${pager.currentPage}/:bookID`} component={BookPage} />*/}
         <div>
           {pager.pages && pager.pages.length &&
               <ul className="pagination">
@@ -87,4 +90,4 @@ class HomeBooks extends Component {
   }
 }
  
-export default HomeBooks;
+export default AuthorCatalog;

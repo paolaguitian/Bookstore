@@ -15,19 +15,22 @@ app.use((req, res, next) => {
 });
 
 //Dummy books for testing
-//const author1 = models.Author.create({firstName: "John", lastName: "Doe", bio: "I am NPC 1"});
-//const author2 = models.Author.create({firstName: "Jane", lastName: "Doe", bio: "I am NPC 2"});
-//const book1 = models.Book.create({bookID : "123456789", genre : "test", sales : 60, quantity: 211, title: "Test Book 1", releaseDate : "2019-01-26", bookCover : "/bookcovers/123456789.png", publisher : "Unreal Books", authorAuthorID : 1});
-//const book2 = models.Book.create({bookID : "123456790",genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book2 = models.Book.create({bookID : "123456791", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book3 = models.Book.create({bookID : "123456792", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book4 = models.Book.create({bookID : "123456793", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book5 = models.Book.create({bookID : "123456794", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book6 = models.Book.create({bookID : "123456795", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book7 = models.Book.create({bookID : "123456796", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book8 = models.Book.create({bookID : "123456797", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book9 = models.Book.create({bookID : "123456798", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
-//const book10 = models.Book.create({bookID : "123456799", genre : "test", sales : 42, quantity: 103, title: "Test Book 2", releaseDate : "2019-01-27", bookCover : "/bookcovers/123456790.png", publisher : "Unreal Books", authorAuthorID : 2})
+//const author1 = models.Author.create({firstName: "Kenneth S.", lastName: "Rubin", bio: "I provide Scrum and agile training and coaching to help companies develop products in an effective and economically sensible way. I am a Certified Scrum Trainer and have trained over 20,000 people on agile and Scrum, Smalltalk development, managing object-oriented projects, and transition management. I have coached over 200 companies, ranging from start-ups to Fortune 10."});
+//const author2 = models.Author.create({firstName: "Jane", lastName: "Doe", bio: "I write books."});
+//const author3 = models.Author.create({firstName: "John", lastName: "Doe", bio: "I write books."});
+//const author4 = models.Author.create({firstName: "Jamie", lastName: "Doe", bio: "I write books."});
+const book1 = models.Book.create({bookID : "978-0137043293", price: 29.99, genre : "Education", sales : 60, quantity: 211, title: "Essential Scrum: A Practical Guide", releaseDate : "2012-10-01", bookCover : "/bookcovers/978-0137043293.jpg", publisher : "Pearson-Education", authorAuthorID : 3});
+
+const book2 = models.Book.create({bookID : "978-0123456790", price: 19.99, genre : "Action", sales : 42, quantity: 103, title: "Cars Blow Up Easily", releaseDate : "2019-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 2})
+const book3 = models.Book.create({bookID : "978-0123456791", price: 21.99,genre : "Romantic-Comedy", sales : 42, quantity: 103, title: "Opposites Always Attract", releaseDate : "2016-02-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 1})
+const book4 = models.Book.create({bookID : "978-0123456792", price: 12.99,genre : "Gothic-Fantasy", sales : 42, quantity: 103, title: "The Unhappy Monster Slayer", releaseDate : "2001-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 4})
+const book5 = models.Book.create({bookID : "978-0123456793", price: 10.99, genre : "Young-Adult", sales : 42, quantity: 103, title: "Minimal Parental Supervision Required", releaseDate : "2030-07-25", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 1})
+const book6 = models.Book.create({bookID : "978-0123456794", price: 9.99, genre : "Action", sales : 42, quantity: 103, title: "Re: Cars Blow Up Even Easier", releaseDate : "2000-01-22", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 2})
+const book7 = models.Book.create({bookID : "978-0123456795", price: 9.99, genre : "Adventure", sales : 42, quantity: 103, title: "Travel Time Means Nothing", releaseDate : "2015-09-09", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 4})
+const book8 = models.Book.create({bookID : "978-0123456796", price: 9.99, genre : "Horror-Fiction", sales : 42, quantity: 103, title: "Some Creepy Place Again", releaseDate : "2017-10-05", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 1})
+const book9 = models.Book.create({bookID : "978-0123456797", price: 15.99, genre : "Education", sales : 42, quantity: 103, title: "How I turned $1 into $1,000,000", releaseDate : "2019-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 2})
+const book10 = models.Book.create({bookID : "978-0123456798", price: 19.99,genre : "Education", sales : 42, quantity: 103, title: "Breaking down the Basics", releaseDate : "1981-06-03", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 4})
+const book11 = models.Book.create({bookID : "978-0123456799", price: 12.99,genre : "Romance", sales : 42, quantity: 103, title: "The Re-skin of a Re-skin", releaseDate : "2019-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 1})
 
 
 // Routes

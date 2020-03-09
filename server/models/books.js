@@ -8,6 +8,9 @@ const books = (sequelize, type) => {
         genre : {
         type : type.STRING(20)
         },
+        price : {
+            type: type.DOUBLE
+        },
         sales : {
         type: type.INTEGER
         },

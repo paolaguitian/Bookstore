@@ -17,4 +17,18 @@ router.get('/:isbn', async (req, res) => {
     return res.json(book);
 });
 
+router.get('/authorbooks/:authorID', async (req, res) => {
+    const authorID = req.params.authorID;
+    const books = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher'],
+        where: {
+          authorAuthorID: authorID
+        }
+    });
+    const page = parseInt(req.query.page) || 1;
+    const pager = paginate(books.length, page, 9);
+    const pageOfBooks = books.slice(pager.startIndex, pager.endIndex + 1)
+    return res.json({pager, pageOfBooks});
+})
+
 export default router;

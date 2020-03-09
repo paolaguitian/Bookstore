@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './home.css';
 import SearchBox from '../search/search';
 import Login from '../login/login';
-import HomeBooks from '../../components/bookdetails/homebooks';
+import BookCatalog from '../../components/bookdetails/bookcatalog';
+
 
 class Home extends Component {
 
@@ -16,8 +17,8 @@ class Home extends Component {
           <Login/>
         </div>
         <div className="booksBar">
-          {/* render bookInfo component <BookInfo/> */}
-          <HomeBooks />
+          {/* render bookInfo component  */}
+          <BookCatalog />
         </div>
       </div>
     );

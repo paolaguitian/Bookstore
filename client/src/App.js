@@ -5,6 +5,8 @@ import { BrowserRouter as Router,
   Link
 } from "react-router-dom";
 import Home from './views/home/home';
+import BookDetails from './components/bookdetails/bookdetails'
+import AuthorCatalog from './components/bookdetails/authordetails/authorcatalog'
 import './App.css'
 
 class App extends Component {
@@ -14,8 +16,11 @@ class App extends Component {
         <div>
           <Link to="/"/>
            <Switch>
-             <Route path="/" component={Home}>
-             </Route>
+             
+             <Route path="/" exact component={Home} />
+             <Route path="/bookdetails/:bookID" exact component={BookDetails} />
+             <Route path="/authorlisting/:authorID" component={AuthorCatalog} />
+             <Route path="/?page=:pageNum/?isbn=:bookID" component={BookDetails} />
            </Switch>
         </div>
       </Router>
