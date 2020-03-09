@@ -5,8 +5,8 @@ import { BrowserRouter as Router,
   Link
 } from "react-router-dom";
 import Home from './views/home/home';
-import BookDetails from './components/bookdetails/bookdetails'
-import AuthorCatalog from './components/bookdetails/authordetails/authorcatalog'
+import BookDetails from './components/bookdetails'
+import AuthorCatalog from './components/authordetails/authorcatalog'
 import './App.css'
 
 class App extends Component {

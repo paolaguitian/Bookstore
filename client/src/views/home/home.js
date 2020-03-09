@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './home.css';
 import SearchBox from '../search/search';
 import Login from '../login/login';
-import BookCatalog from '../../components/bookdetails/bookcatalog';
+import BookCatalog from '../../components/bookcatalog';
 
 
 class Home extends Component {
