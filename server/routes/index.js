@@ -4,7 +4,10 @@
 
 import bookR from './bookR';
 import authorR from './authorR';
+import user from './user';
 
 export default {
-  bookR, authorR
+  bookR,
+  authorR,
+  user,
 };
