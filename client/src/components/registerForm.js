@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Input, Button, Icon } from 'antd';
+import axios from 'axios';
 
 
 class Register extends Component {
@@ -12,7 +13,14 @@ class Register extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        //TODO:  1. send request to create user 2.success ? set global var isLoggedIn true and re route to dashboard : report system down
+        axios.post('/api/user/create', values)
+          .then(function(res){
+            console.log(`yay: ${res}`)
+          })
+          .catch(function(err) {
+            console.log(`UH OH: ${err}`)
+          })
       }
     });
   };
@@ -92,6 +100,12 @@ class Register extends Component {
                 message: 'Please input your E-mail!',
               },
             ],
+          })(<Input />)}
+        </Form.Item>
+
+        <Form.Item label="Username">
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input a username!',},],
           })(<Input />)}
         </Form.Item>
 
