@@ -5,21 +5,28 @@ const books = (sequelize, type) => {
             type: type.STRING(20),
             allowNull: false
         },
+        title : {
+        allowNull : false,
+        type : type.STRING(255)
+        },
         genre : {
         type : type.STRING(20)
         },
         price : {
             type: type.DOUBLE
         },
+        description: {
+            type: type.TEXT,
+            allowNull: false,
+        },
+        pages: {
+            type: type.INTEGER
+        },
         sales : {
         type: type.INTEGER
         },
         quantity : {
         type: type.INTEGER
-        },
-        title : {
-        allowNull : false,
-        type : type.STRING(255)
         },
         releaseDate : {
             type: type.DATEONLY
