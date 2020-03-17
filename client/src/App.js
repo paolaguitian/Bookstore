@@ -5,16 +5,20 @@ import { BrowserRouter as Router,
   Link
 } from "react-router-dom";
 import Home from './views/home/home';
-import BookDetails from './components/bookdetails'
-import AuthorCatalog from './components/authordetails/authorcatalog'
-import './App.css'
+import BookDetails from './components/bookdetails';
+import Dashboard from './components/dashboard';
+import AuthorCatalog from './components/authordetails/authorcatalog';
+import './App.css';
 import UserContext from './context';
+import ProtectedRoute from './components/protectedRoute';
+
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {}
+      user: {},
+      isLoggedIn: false
     };
   }
 
@@ -32,8 +36,7 @@ class App extends Component {
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />
              <Route path="/authorlisting/:authorID" component={AuthorCatalog} />
              <Route path="/?page=:pageNum/?isbn=:bookID" component={BookDetails} />
-             {/* create private routing and authentication for dashboard */}
-             <Route path="/dashboard" component={() => <div>Welcome to `${this.state.user.userID}`'s dashboard!</div>} />
+             <ProtectedRoute path="/dashboard" isLoggedIn={this.state.isLoggedIn} component={Dashboard}/>
            </Switch>
         </div>
         </UserContext.Provider>
