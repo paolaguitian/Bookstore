@@ -40,7 +40,6 @@ class Login extends Component {
     console.log("write the logic to submit form to create user or log them in")
   }
 
-
   render() {
     return (
       <div>

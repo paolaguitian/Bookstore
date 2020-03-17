@@ -6,15 +6,20 @@ import BookCatalog from '../../components/bookcatalog';
 
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
+    console.log(this.props);
+
     return (
       <div className="container">
         <hr className="divider"/>
         <div className="topBar">
           <div className="title">Bookstore 12</div>
           <SearchBox/>
-          <Login/>
+          <Login />
         </div>
         <div className="booksBar">
           {/* render bookInfo component  */}
