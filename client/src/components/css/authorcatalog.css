@@ -1,7 +1,10 @@
 .homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     align-items: center;
     text-align: center;
 }
@@ -13,23 +16,23 @@
     width: 100%;
 }
   
-.pagebutton {
+.pagination li {
+    display: inline-table;
+}
+
+.pagination li a {
     display: inline-table;
     color:#303030;
+    padding: 14px 16px;
     text-decoration: none;
 }
 
-.pagination .pagebutton a {
-    display: inline-table;
-    padding: 14px 16px;
-}
-
-.pagination .pagebutton:hover {
+.pagination li a:hover {
     background-color: cornflowerblue;
     color: white;
 }
 
-.pagination .pagebutton:active {
+.pagination li a:active {
     background-color: cornflowerblue;
     color: white;
 }

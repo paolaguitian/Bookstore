@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import { List } from 'antd'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { List } from 'antd';
 import BookCard from '../bookcard.js';
-import '../css/bookcatalog.css';
-import AuthorName from './authorname'
+import '../css/authorcatalog.css';
+import AuthorName from './authorname';
 
 class AuthorCatalog extends Component {
   constructor(props) {
@@ -16,23 +17,31 @@ class AuthorCatalog extends Component {
     }
   }
 
-  getPageofAuthorBooks = (authorID) => {
+  getPageOfAuthorBooks = (authorID) => {
     const params = new URLSearchParams(window.location.search);
     const page = parseInt(params.get('page')) || 1;
     if (page !== this.state.pager.currentPage) {
-      fetch(`/api/books/authorbooks/${authorID}?page=${page}`, {method : 'GET'})
-        .then(res => res.json())
-        .then(({pager, pageOfBooks}) => this.setState({pager, pageOfBooks}, () => console.log(pageOfBooks)))
+      axios.get(`/api/books/authorbooks/${authorID}`, {
+        params : {
+          page: page
+        }
+      })
+        .then( (res) => {
+          this.setState({ pager : res.data.pager, pageOfBooks: res.data.pageOfBooks})
+        })
+        .catch( (error) => {
+          console.log(error);
+        })
     }
   }
 
   componentDidMount() {
-    this.getPageofAuthorBooks(this.props.match.params.authorID);
+    this.getPageOfAuthorBooks(this.props.match.params.authorID);
   }
 
   componentDidUpdate(prevProps) {
     if(this.props.match.params.authorID !== prevProps.match.params.authorID) {
-      this.getPageofAuthorBooks(this.props.match.params.authorID)
+      this.getPageOfAuthorBooks(this.props.match.params.authorID)
     }
   }
 
@@ -40,6 +49,7 @@ class AuthorCatalog extends Component {
     const {pager, pageOfBooks} = this.state
 
     return (
+      
       <div className="homeContainer">
         <AuthorName authorAuthorID={this.props.match.params.authorID} />
         <div>
@@ -86,6 +96,7 @@ class AuthorCatalog extends Component {
           }                    
         </div>
       </div>
+      
     )
   }
 }

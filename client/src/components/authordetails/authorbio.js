@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
-import '../css/bookdetails.css'
+import axios from 'axios';
+import {Skeleton} from 'antd';
+import '../css/bookdetails.css';
 
 class AuthorBio extends Component {
     constructor(props) {
       super(props)   
       this.state = {
+        loading : true,
         author: []
       }
     }
   
     getAuthorData = (authorID) => {
-      fetch(`/api/authors/${authorID}`)
-        .then(res => res.json())
-        .then(authordata => this.setState({ author : authordata}, () => console.log("Author data is", authordata)))
+      axios.get(`/api/authors/${authorID}`)
+        .then( (res) => {
+          this.setState({ author : res.data, loading : false})
+        })
+        .catch( (error) => {
+          console.log(error);
+        })
     }
   
     componentDidMount() {
@@ -23,16 +30,18 @@ class AuthorBio extends Component {
       if(this.props.authorAuthorID !== prevProps.authorAuthorID){
         this.getAuthorData(this.props.authorAuthorID);
       }
-    };*   
+    };    
   
     render () {
-      const {bio} = this.state.author;
       return (
-        <React.Fragment>
-         <p>{bio}</p>
-        </React.Fragment>
+        <div>
+          <Skeleton loading={this.state.loading}>
+            <p>{this.state.author.bio}</p>
+          </Skeleton>
+        </div>
       );
     }
   }
 
-  export default AuthorBio;
+
+export default AuthorBio;

@@ -5,9 +5,9 @@ import { BrowserRouter as Router,
   Link
 } from "react-router-dom";
 import Home from './views/home/home';
-import BookDetails from './components/bookdetails'
-import AuthorCatalog from './components/authordetails/authorcatalog'
-import './App.css'
+import BookDetails from './components/bookdetails';
+import AuthorCatalog from './components/authordetails/authorcatalog';
+import './App.css';
 
 class App extends Component {
   render () {
@@ -16,7 +16,6 @@ class App extends Component {
         <div>
           <Link to="/"/>
            <Switch>
-             
              <Route path="/" exact component={Home} />
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />
              <Route path="/authorlisting/:authorID" component={AuthorCatalog} />

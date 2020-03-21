@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { 
   Button, 
   Card , 
   Descriptions, 
   Skeleton } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import './css/bookdetails.css'
-import AuthorCatalogLink from './authordetails/authorcataloglink'
-import AuthorBio from './authordetails/authorcataloglink'
+import './css/bookdetails.css';
+import AuthorCatalogLink from './authordetails/authorcataloglink';
+import AuthorBio from './authordetails/authorbio';
 
 class BookDetails extends Component {
   constructor(props) {
@@ -19,13 +20,30 @@ class BookDetails extends Component {
   }
 
   getBookData = (bookID) => {
-    fetch(`/api/books/${bookID}`)
-      .then(res => res.json())
-      .then(bookdata => this.setState({ book : bookdata, loading : false }, () => console.log("Book data is", bookdata)))
+    axios.get(`/api/books/${bookID}`, 
+    )
+      .then( (res) => {
+        this.setState({ book : res.data, loading : false })
+      })
+      .catch( (error) => {
+        console.log(error);
+      })
   }
 
   componentDidMount() {
       this.getBookData(this.props.match.params.bookID);
+      let modal = document.getElementById("coverModal");
+
+      let img = document.getElementById("coverImage");
+      let modalImg = document.getElementById("enlargedCover")
+      img.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = this.src;
+      }
+      let span = document.getElementsByClassName("close")[0];
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
   }
 
   componentDidUpdate(prevProps) {
@@ -35,7 +53,7 @@ class BookDetails extends Component {
   }
 
   render () {  
-    const {bookID, title, bookCover, authorAuthorID, price, quantity, publisher, releaseDate} = this.state.book
+    const {bookID, title, pages, description, bookCover, authorAuthorID, price, quantity, publisher, releaseDate} = this.state.book;
    
     const stockStatus = () => {
       if (quantity > 20){
@@ -50,14 +68,19 @@ class BookDetails extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div className="bookPage">
         <Card 
         hoverable
         className="bookDetails"
         bordered={true}
         >
           <div className="bookDetailsCover">
-            <img src={`http://localhost:3001/static/${bookCover}`} alt={title} title={title}/>
+            <img id="coverImage" src={`http://localhost:3001/static/${bookCover}`} alt={title} title={title}/>
+          </div>
+          
+          <div id="coverModal" className="modal">
+            <span className="close">&times;</span>
+            <img className="modal-content" id="enlargedCover" />
           </div>
 
           <div className="bookInfo">
@@ -83,14 +106,14 @@ class BookDetails extends Component {
         </Card>
 
         <Descriptions className="bookDetailsTable" title="Product Details" layout="vertical" bordered>
-          <Descriptions.Item label="Description" span={3}>Book Description</Descriptions.Item>
+          <Descriptions.Item label="Description" span={3}>{description}</Descriptions.Item>
           <Descriptions.Item label="ISBN" span={3}>{bookID}</Descriptions.Item>
-          <Descriptions.Item label="Author Biography" span={3}>{/*<AuthorBio authorAuthorID={authorAuthorID}/>*/}Bio</Descriptions.Item>
-          <Descriptions.Item label="Pages" span={3}>YES</Descriptions.Item>
+          <Descriptions.Item label="Author Biography" span={3}>{/*bio*/}</Descriptions.Item>
+          <Descriptions.Item label="Pages" span={3}>{pages}</Descriptions.Item>
           <Descriptions.Item label="Publisher" span={3}>{publisher}</Descriptions.Item> 
           <Descriptions.Item label="Release Date" span={3}>{releaseDate}</Descriptions.Item>  
         </Descriptions>
-      </React.Fragment>
+      </div>
     );
   }
 }

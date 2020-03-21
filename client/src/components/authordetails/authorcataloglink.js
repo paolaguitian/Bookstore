@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Skeleton } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
-import '../css/bookdetails.css'
+import '../css/bookdetails.css';
 
 class AuthorCatalogLink extends Component {
     constructor(props) {
@@ -14,9 +15,13 @@ class AuthorCatalogLink extends Component {
     }
   
     getAuthorData = (authorID) => {
-      fetch(`/api/authors/${authorID}`)
-        .then(res => res.json())
-        .then(authordata => this.setState({ author : authordata, loading : false}, () => console.log("Author data is", authordata)))
+      axios.get(`/api/authors/${authorID}`)
+        .then( (res) => {
+          this.setState({ author : res.data, loading : false})
+        })
+        .catch( (error) => {
+          console.log(error);
+        })
     }
   
     componentDidMount() {
