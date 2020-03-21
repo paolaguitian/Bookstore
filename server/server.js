@@ -30,6 +30,7 @@ app.use((req, res, next) => {
 //const book9 = models.Book.create({bookID : "978-0123456797", description: "Some book info", pages: 200, price: 15.99, genre : "Education", sales : 42, quantity: 103, title: "How I turned $1 into $1,000,000", releaseDate : "2019-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 2})
 //const book10 = models.Book.create({bookID : "978-0123456798", description: "Some book info", pages: 200, price: 19.99,genre : "Education", sales : 42, quantity: 103, title: "Breaking down the Basics", releaseDate : "1981-06-03", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 4})
 //const book11 = models.Book.create({bookID : "978-0123456799", description: "Some book info", pages: 200, price: 12.99,genre : "Romance", sales : 42, quantity: 103, title: "The Re-skin of a Re-skin", releaseDate : "2019-01-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 1})
+//const book12 = models.Book.create({bookID : "978-0123456800", description: "Some book info", pages: 190, price: 12.99,genre : "Young-Adult", sales : 42, quantity: 5, title: "School Time", releaseDate : "2015-06-27", bookCover : "/bookcovers/978-0123456790.jpg", publisher : "Unreal Books", authorAuthorID : 12})
 
 
 // Routes
