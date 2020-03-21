@@ -1,0 +1,56 @@
+.navbar {
+    list-style-type: none;
+    z-index: 1;
+    padding: 0;
+    overflow: hidden;
+    background-color:  rgb(56, 57, 59);
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.logo {
+    text-align: center;
+    margin: auto;
+    color: white;
+    padding: 20px 30px 20px 30px;
+    background-color: cornflowerblue;
+}
+  
+.navitem {
+    float: left;
+    margin: auto;
+}
+
+.navsearch {
+    float: right;
+    padding: 14px 30px 14px 30px;
+}
+
+.navlogin {
+    float: right;
+    padding: 14px 30px 14px 30px;
+}
+
+.navitem a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 30px 20px 30px;
+    width: 100%;
+    text-decoration: none;
+}
+
+.navitem a:hover:not(.active) {
+    background-color: white;
+    color: black;
+}
+
+.navitem .active {
+    background-color: white;
+    color: black;
+}

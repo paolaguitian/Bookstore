@@ -73,10 +73,10 @@ class BookCatalog extends Component {
         <div>
           {pager.pages && pager.pages.length &&
               <ul className="pagination">
-                  <li className="pagebutton active">
+                  <li className={`pagebutton ${pager.currentPage === 1 ? 'invisible' : ''}`}>
                       <Link to={{ search: `?page=1` }}>First</Link>
                   </li>
-                  <li className="pagebutton">
+                  <li className={`pagebutton ${pager.currentPage === 1 ? 'invisible' : ''}`}>
                       <Link to={{ search: `?page=${pager.currentPage - 1}` }}>Prev</Link>
                   </li>
                   {pager.pages.map(page =>
@@ -84,10 +84,10 @@ class BookCatalog extends Component {
                           <Link to={{ search: `?page=${page}` }}>{page}</Link>
                       </li>
                   )}
-                  <li className="pagebutton">
+                  <li className={`pagebutton ${pager.currentPage === pager.totalPages ? 'invisible' : ''}`}>
                       <Link to={{ search: `?page=${pager.currentPage + 1}` }}>Next</Link>
                   </li>
-                  <li className="pagebutton">
+                  <li className={`pagebutton ${pager.currentPage === pager.totalPages ? 'invisible' : ''}`}>
                       <Link to={{ search: `?page=${pager.totalPages}` }}>Last</Link>
                   </li>
               </ul>

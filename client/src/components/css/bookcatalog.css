@@ -15,21 +15,23 @@
   
 .pagebutton {
     display: inline-table;
-    color:#303030;
-    text-decoration: none;
 }
 
 .pagination .pagebutton a {
     display: inline-table;
     padding: 14px 16px;
+    text-decoration: none;
+    color:#303030;
 }
 
 .pagination .pagebutton:hover {
     background-color: cornflowerblue;
-    color: white;
 }
 
-.pagination .pagebutton:active {
+.active {
     background-color: cornflowerblue;
-    color: white;
+}
+
+.invisible {
+    visibility: hidden;
 }

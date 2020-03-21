@@ -74,25 +74,25 @@ class AuthorCatalog extends Component {
         {/*<Route path={`?page=${pager.currentPage}/:bookID`} component={BookPage} />*/}
         <div>
           {pager.pages && pager.pages.length &&
-              <ul className="pagination">
-                  <li className="pagelink">
-                      <Link to={{ search: `?page=1` }}>First</Link>
+            <ul className="pagination">
+              <li className={`pagebutton ${pager.currentPage === 1 ? 'invisible' : ''}`}>
+                  <Link to={{ search: `?page=1` }}>First</Link>
+              </li>
+              <li className={`pagebutton ${pager.currentPage === 1 ? 'invisible' : ''}`}>
+                  <Link to={{ search: `?page=${pager.currentPage - 1}` }}>Prev</Link>
+              </li>
+              {pager.pages.map(page =>
+                  <li key={page} className={`pagebutton ${pager.currentPage === page ? 'active' : ''}`}>
+                      <Link to={{ search: `?page=${page}` }}>{page}</Link>
                   </li>
-                  <li className="pagelink">
-                      <Link to={{ search: `?page=${pager.currentPage - 1}` }}>Prev</Link>
-                  </li>
-                  {pager.pages.map(page =>
-                      <li key={page}>
-                          <Link to={{ search: `?page=${page}` }}>{page}</Link>
-                      </li>
-                  )}
-                  <li className="pagelink">
-                      <Link to={{ search: `?page=${pager.currentPage + 1}` }}>Next</Link>
-                  </li>
-                  <li className="pagelink">
-                      <Link to={{ search: `?page=${pager.totalPages}` }}>Last</Link>
-                  </li>
-              </ul>
+              )}
+              <li className={`pagebutton ${pager.currentPage === pager.totalPages ? 'invisible' : ''}`}>
+                  <Link to={{ search: `?page=${pager.currentPage + 1}` }}>Next</Link>
+              </li>
+              <li className={`pagebutton ${pager.currentPage === pager.totalPages ? 'invisible' : ''}`}>
+                  <Link to={{ search: `?page=${pager.totalPages}` }}>Last</Link>
+              </li>
+            </ul>
           }                    
         </div>
       </div>

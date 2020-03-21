@@ -16,23 +16,27 @@
     width: 100%;
 }
   
-.pagination li {
-    display: inline-table;
+.pagebutton {
+    display: inline-table; 
 }
 
-.pagination li a {
+.pagination .pagebutton a {
     display: inline-table;
-    color:#303030;
     padding: 14px 16px;
     text-decoration: none;
+    
 }
 
-.pagination li a:hover {
+.pagination .pagebutton:hover {
     background-color: cornflowerblue;
-    color: white;
 }
 
-.pagination li a:active {
+.active {
     background-color: cornflowerblue;
-    color: white;
 }
+
+.invisible {
+    visibility: hidden;
+}
+
+
