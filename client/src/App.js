@@ -18,9 +18,10 @@ class App extends Component {
     super(props)
     this.state = {
       user: {},
-      isLoggedIn: false
+      isLoggedIn: !!localStorage.getItem('token'),
     };
   }
+
 
   render() {
     return (
@@ -32,7 +33,9 @@ class App extends Component {
         <div>
           <Link to="/"/>
            <Switch>
-             <Route path="/" exact component={Home} />
+             <Route path="/" exact>
+                <Home isLoggedIn={this.state.isLoggedIn} />
+              </Route>
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />
              <Route path="/authorlisting/:authorID" component={AuthorCatalog} />
              <Route path="/?page=:pageNum/?isbn=:bookID" component={BookDetails} />

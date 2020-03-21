@@ -19,9 +19,9 @@ class Register extends Component {
         axios.post('/api/user/create', values)
           .then((res) => {
             const data = res.data;
-            setState({ user: data, isLoggedIn: true });
+            localStorage.setItem('token', data.accessToken)
+            setState({ user: data.user});
             this.props.history.push('/dashboard');
-            // 2. SET SESSION TOKEN
           })
           .catch((err) => {
             const error = err.response;
