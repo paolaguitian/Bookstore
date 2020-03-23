@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import {Skeleton} from 'antd';
-import '../css/bookcard.css'
+import '../css/bookcard.css';
 
 class AuthorName extends Component {
     constructor(props) {
@@ -12,9 +13,13 @@ class AuthorName extends Component {
     }
   
     getAuthorData = (authorID) => {
-      fetch(`/api/authors/${authorID}`)
-        .then(res => res.json())
-        .then(authordata => this.setState({ author : authordata, loading : false}, () => console.log("Author data is", authordata)))
+      axios.get(`/api/authors/${authorID}`)
+        .then( (res) => {
+          this.setState({ author : res.data, loading : false})
+        })
+        .catch( (error) => {
+          console.log(error);
+        })
     }
   
     componentDidMount() {

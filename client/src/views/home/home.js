@@ -15,12 +15,12 @@ class Home extends Component {
 
     return (
       <div className="container">
-        <hr className="divider"/>
+        {/*<hr className="divider"/>
         <div className="topBar">
           <div className="title">Bookstore 12</div>
           <SearchBox/>
           <Login />
-        </div>
+    </div>*/}
         <div className="booksBar">
           {/* render bookInfo component  */}
           <BookCatalog />
