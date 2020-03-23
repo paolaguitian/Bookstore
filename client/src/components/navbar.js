@@ -13,7 +13,10 @@ const NavBar = (props) => {
                     <li className="navitem"><NavLink to="/shop">Shop</NavLink></li>
                     <li className="navitem"><NavLink to="/about">About Us</NavLink></li>
                     <li className="navlogin">
-                        <Login isLoggedIn={props.isLoggedIn} />
+                        <Login
+                          isLoggedIn={props.isLoggedIn}
+                          logout={props.logout}
+                        />
                     </li>
                     <li className="navsearch"><SearchBox /></li>
                 </ul>

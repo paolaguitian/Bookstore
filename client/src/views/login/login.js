@@ -14,8 +14,7 @@ const Login = (props) => {
           Dashboard
         </a>
       </Menu.Item>
-      <Menu.Item>
-        {/* TODO: logout user, clear session token  */}
+      <Menu.Item onClick={props.logout}>
         Logout
       </Menu.Item>
     </Menu>

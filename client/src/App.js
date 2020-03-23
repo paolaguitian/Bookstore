@@ -24,16 +24,19 @@ class App extends Component {
     };
   }
 
+  logout = () => {
+    localStorage.removeItem('token');
+    this.setState({isLoggedIn: null})
+  }
 
   render() {
-
     return (
       <Router>
         <UserContext.Provider value={{
           state: this.state,
           setState: this.setState.bind(this),
         }}>
-        <NavBar isLoggedIn={this.state.isLoggedIn} />
+        <NavBar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
         <div className="maincontent">
            <Switch>
              <Route path="/" exact>
