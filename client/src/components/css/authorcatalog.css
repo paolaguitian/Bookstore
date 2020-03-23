@@ -1,7 +1,10 @@
 .homeContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     margin-left: auto;
     margin-right: auto;
-    width: 60%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     align-items: center;
     text-align: center;
 }
@@ -14,14 +17,14 @@
 }
   
 .pagebutton {
-    display: inline-table;
+    display: inline-table; 
 }
 
 .pagination .pagebutton a {
     display: inline-table;
     padding: 14px 16px;
     text-decoration: none;
-    color:#303030;
+    
 }
 
 .pagination .pagebutton:hover {
@@ -35,3 +38,5 @@
 .invisible {
     visibility: hidden;
 }
+
+

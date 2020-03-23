@@ -1,8 +1,10 @@
 .bookCard {
     width: 240px;
+   
     display: inline-block;
     justify-content: space-evenly;
     text-align: left;
+    padding-bottom: 10vh;
 }
 
 .bookCard img {

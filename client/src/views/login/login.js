@@ -31,19 +31,18 @@ const Login = (props) => {
         <Button
           type="dashed"
           icon="user"
-          onClick={setModal(true)}>
+          onClick={() => setModal(true)}>
           Hello, Sign In
        </Button>
         <Modal
           title="Sign in or Create an Account"
           visible={showModal}
-          onOk={this.submitForm}
-          onCancel={setModal(false)}
+          onCancel={() => setModal(false)}
           footer={null}
         >
           {showRegister ?
-            <RegisterForm switchView={setRegister(false)} /> :
-            <SignInForm switchView={setRegister(true)} />
+            <RegisterForm switchView={() => setRegister(false)} /> :
+            <SignInForm switchView={() => setRegister(true)} />
           }
         </Modal>
       </div>

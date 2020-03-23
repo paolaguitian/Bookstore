@@ -8,12 +8,12 @@ import BookCatalog from '../../components/bookcatalog';
 const Home = (props) =>  {
     return (
       <div className="container">
-        <hr className="divider"/>
+        {/*<hr className="divider"/>
         <div className="topBar">
           <div className="title">Bookstore 12</div>
           <SearchBox/>
-          <Login isLoggedIn={props.isLoggedIn} />
-        </div>
+          <Login />
+    </div>*/}
         <div className="booksBar">
           {/* render bookInfo component  */}
           <BookCatalog />

@@ -5,6 +5,8 @@ import { BrowserRouter as Router,
   Link
 } from "react-router-dom";
 import Home from './views/home/home';
+import NavBar from './components/navbar';
+import AboutUs from './views/aboutus/aboutus'
 import BookDetails from './components/bookdetails';
 import Dashboard from './components/dashboard';
 import AuthorCatalog from './components/authordetails/authorcatalog';
@@ -18,27 +20,29 @@ class App extends Component {
     super(props)
     this.state = {
       user: {},
-      isLoggedIn: !!localStorage.getItem('token'),
+      isLoggedIn: localStorage.getItem('token'),
     };
   }
 
 
   render() {
+
     return (
       <Router>
         <UserContext.Provider value={{
           state: this.state,
           setState: this.setState.bind(this),
         }}>
-        <div>
-          <Link to="/"/>
+        <NavBar isLoggedIn={this.state.isLoggedIn} />
+        <div className="maincontent">
            <Switch>
              <Route path="/" exact>
-                <Home isLoggedIn={this.state.isLoggedIn} />
+                <Home/>
               </Route>
+             <Route path="/shop" exact component={Home} />
+             <Route path="/about" exact component={AboutUs} />
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />
              <Route path="/authorlisting/:authorID" component={AuthorCatalog} />
-             <Route path="/?page=:pageNum/?isbn=:bookID" component={BookDetails} />
              <ProtectedRoute path="/dashboard" isLoggedIn={this.state.isLoggedIn} component={Dashboard}/>
            </Switch>
         </div>

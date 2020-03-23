@@ -20,19 +20,14 @@ class Register extends Component {
           .then((res) => {
             const data = res.data;
             localStorage.setItem('token', data.accessToken)
-            setState({ user: data.user});
+            setState({
+              user: data.user,
+              isLoggedIn: localStorage.getItem('token')
+            });
             this.props.history.push('/dashboard');
           })
           .catch((err) => {
-            const error = err.response;
-
-            if (error.status === 403) {
-              this.setState({ topError: error.data })
-            }
-
-            if (error.status === 400) {
-              this.setState({ topError: error.data })
-            }
+              this.setState({ topError: err.response.data })
           })
       }
     });
