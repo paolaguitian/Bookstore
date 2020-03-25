@@ -20,8 +20,13 @@ class App extends Component {
     super(props)
     this.state = {
       user: {},
-      isLoggedIn: false
+      isLoggedIn: localStorage.getItem('token'),
     };
+  }
+
+  logout = () => {
+    localStorage.removeItem('token');
+    this.setState({isLoggedIn: null})
   }
 
   render() {
@@ -31,11 +36,12 @@ class App extends Component {
           state: this.state,
           setState: this.setState.bind(this),
         }}>
-        <NavBar />
+        <NavBar isLoggedIn={this.state.isLoggedIn} logout={this.logout} />
         <div className="maincontent">
            <Switch>
-            <Route path="/" exact component={Home} />
-             <Route path="/home" exact component={Home} />
+             <Route path="/" exact>
+                <Home/>
+              </Route>
              <Route path="/shop" exact component={Home} />
              <Route path="/about" exact component={AboutUs} />
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />

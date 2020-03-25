@@ -15,14 +15,9 @@ class BookCard extends Component {
   }
 
   getBookData = (bookID) => {
-    axios.get(`/api/books/${bookID}`, 
-    )
-      .then( (res) => {
-        this.setState({ book : res.data, loading : false })
-      })
-      .catch( (error) => {
-        console.log(error);
-      })
+    fetch(`/api/books/${bookID}`)
+      .then(res => res.json())
+      .then(bookdata => this.setState({ book : bookdata, loading : false }))
   }
 
   componentDidMount() {
@@ -35,10 +30,10 @@ class BookCard extends Component {
     }
   }
 
-  render () {  
+  render () {
     const {bookID, title, bookCover, authorAuthorID, price, genre, publisher} = this.state.book
     return (
-      <Card 
+      <Card
       hoverable
       className="bookCard"
       bordered={true}
@@ -53,10 +48,10 @@ class BookCard extends Component {
         <h3 className="infoTag">${price}</h3>
         <div className="bookPageLink"><Link to={`/bookdetails/${bookID}`}>View More</Link></div>
         </Skeleton>
-       
+
       </Card>
     );
   }
 }
- 
+
 export default BookCard;

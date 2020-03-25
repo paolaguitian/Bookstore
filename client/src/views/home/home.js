@@ -1,18 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './home.css';
 import SearchBox from '../search/search';
 import Login from '../login/login';
 import BookCatalog from '../../components/bookcatalog';
 
 
-class Home extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    console.log(this.props);
-
+const Home = (props) =>  {
     return (
       <div className="container">
         {/*<hr className="divider"/>
@@ -27,7 +20,7 @@ class Home extends Component {
         </div>
       </div>
     );
-  }
 }
+
 
 export default Home;

@@ -7,13 +7,13 @@ import '../css/bookdetails.css';
 
 class AuthorCatalogLink extends Component {
     constructor(props) {
-      super(props)   
+      super(props)
       this.state = {
         loading : true,
         author: []
       }
     }
-  
+
     getAuthorData = (authorID) => {
       axios.get(`/api/authors/${authorID}`)
         .then( (res) => {
@@ -23,17 +23,17 @@ class AuthorCatalogLink extends Component {
           console.log(error);
         })
     }
-  
+
     componentDidMount() {
       this.getAuthorData(this.props.authorAuthorID)
     }
-  
+
     componentDidUpdate(prevProps) {
       if(this.props.authorAuthorID !== prevProps.authorAuthorID){
         this.getAuthorData(this.props.authorAuthorID);
       }
-    };    
-  
+    };
+
     render () {
       return (
         <div>

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { 
-  Button, 
-  Card , 
-  Descriptions, 
+import {
+  Button,
+  Card ,
+  Descriptions,
   Skeleton } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import './css/bookdetails.css';
@@ -20,7 +20,7 @@ class BookDetails extends Component {
   }
 
   getBookData = (bookID) => {
-    axios.get(`/api/books/${bookID}`, 
+    axios.get(`/api/books/${bookID}`,
     )
       .then( (res) => {
         this.setState({ book : res.data, loading : false })
@@ -52,9 +52,9 @@ class BookDetails extends Component {
     }
   }
 
-  render () {  
+  render () {
     const {bookID, title, pages, description, bookCover, authorAuthorID, price, quantity, publisher, releaseDate} = this.state.book;
-   
+
     const stockStatus = () => {
       if (quantity > 20){
         return (<div><h2 className="inStockStatus">In-Stock</h2></div>);
@@ -69,7 +69,7 @@ class BookDetails extends Component {
 
     return (
       <div className="bookPage">
-        <Card 
+        <Card
         hoverable
         className="bookDetails"
         bordered={true}
@@ -77,7 +77,7 @@ class BookDetails extends Component {
           <div className="bookDetailsCover">
             <img id="coverImage" src={`http://localhost:3001/static/${bookCover}`} alt={title} title={title}/>
           </div>
-          
+
           <div id="coverModal" className="modal">
             <span className="close">&times;</span>
             <img className="modal-content" id="enlargedCover" />
@@ -92,7 +92,7 @@ class BookDetails extends Component {
             {stockStatus()}
             <br />
             <br />
-            
+
             <Button type="default" size={'large'}>
               Add to Cart
             </Button>
@@ -110,8 +110,8 @@ class BookDetails extends Component {
           <Descriptions.Item label="ISBN" span={3}>{bookID}</Descriptions.Item>
           <Descriptions.Item label="Author Biography" span={3}>{/*bio*/}</Descriptions.Item>
           <Descriptions.Item label="Pages" span={3}>{pages}</Descriptions.Item>
-          <Descriptions.Item label="Publisher" span={3}>{publisher}</Descriptions.Item> 
-          <Descriptions.Item label="Release Date" span={3}>{releaseDate}</Descriptions.Item>  
+          <Descriptions.Item label="Publisher" span={3}>{publisher}</Descriptions.Item>
+          <Descriptions.Item label="Release Date" span={3}>{releaseDate}</Descriptions.Item>
         </Descriptions>
       </div>
     );

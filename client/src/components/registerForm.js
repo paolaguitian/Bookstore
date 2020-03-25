@@ -3,10 +3,13 @@ import { Form, Input, Button, Icon } from 'antd';
 import axios from 'axios';
 import UserContext from '../context';
 import { withRouter } from 'react-router';
+import { Alert } from 'antd';
+
 
 class Register extends Component {
   state = {
     confirmDirty: false,
+    topError: null,
   };
 
   handleSubmit = (e, setState) => {
@@ -16,15 +19,15 @@ class Register extends Component {
         axios.post('/api/user/create', values)
           .then((res) => {
             const data = res.data;
-            setState({ user: data, isLoggedIn: true });
+            localStorage.setItem('token', data.accessToken)
+            setState({
+              user: data.user,
+              isLoggedIn: localStorage.getItem('token')
+            });
             this.props.history.push('/dashboard');
-            //1. authenticate user
-            // 2. SET SESSION TOKEN
           })
-          .catch(function (err) {
-            // TODO:
-            // error view/try again later
-            console.log(`UH OH: ${err}`)
+          .catch((err) => {
+              this.setState({ topError: err.response.data })
           })
       }
     });
@@ -51,7 +54,6 @@ class Register extends Component {
     }
     callback();
   };
-
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -87,6 +89,14 @@ class Register extends Component {
               {...formItemLayout}
               onSubmit={(e) => this.handleSubmit(e, setState)}
             >
+              {this.state.topError ?
+                <Alert
+                 message="Error"
+                 description={this.state.topError}
+                 type="error"
+                 showIcon
+                />
+              : null}
               <Form.Item label="First Name">
                 {getFieldDecorator('firstName', {
                   rules: [{ required: true, message: 'Please input your first name!', },],
@@ -104,11 +114,11 @@ class Register extends Component {
                   rules: [
                     {
                       type: 'email',
-                      message: 'The input is not valid E-mail!',
+                      message: 'Invalid Email'
                     },
                     {
                       required: true,
-                      message: 'Please input your E-mail!',
+                      message:'Please input your E-mail!'
                     },
                   ],
                 })(<Input />)}
@@ -116,7 +126,12 @@ class Register extends Component {
 
               <Form.Item label="Username">
                 {getFieldDecorator('username', {
-                  rules: [{ required: true, message: 'Please input a username!', },],
+                  rules: [
+                    {
+                      required: true,
+                      message:  'Please input a username!'
+                     },
+                  ],
                 })(<Input />)}
               </Form.Item>
 
