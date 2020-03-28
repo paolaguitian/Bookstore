@@ -21,13 +21,13 @@ class Register extends Component {
             localStorage.setItem('token', res.data.accessToken)
             localStorage.setItem('user', JSON.stringify(res.data.user))
             setState({
-              user:localStorage.getItem('user'),
+              user: JSON.parse(localStorage.getItem('user')),
               isLoggedIn: localStorage.getItem('token')
             });
             this.props.history.push('/dashboard');
           })
           .catch((err) => {
-              this.setState({ topError: err.response.data })
+            this.setState({ topError: err.response.data })
           })
       }
     });
@@ -91,12 +91,12 @@ class Register extends Component {
             >
               {this.state.topError ?
                 <Alert
-                 message="Error"
-                 description={this.state.topError}
-                 type="error"
-                 showIcon
+                  message="Error"
+                  description={this.state.topError}
+                  type="error"
+                  showIcon
                 />
-              : null}
+                : null}
               <Form.Item label="First Name">
                 {getFieldDecorator('firstName', {
                   rules: [{ required: true, message: 'Please input your first name!', },],
@@ -118,7 +118,7 @@ class Register extends Component {
                     },
                     {
                       required: true,
-                      message:'Please input your E-mail!'
+                      message: 'Please input your E-mail!'
                     },
                   ],
                 })(<Input />)}
@@ -129,8 +129,8 @@ class Register extends Component {
                   rules: [
                     {
                       required: true,
-                      message:  'Please input a username!'
-                     },
+                      message: 'Please input a username!'
+                    },
                   ],
                 })(<Input />)}
               </Form.Item>
@@ -178,7 +178,7 @@ class Register extends Component {
               <Form.Item {...tailFormItemLayout}>
                 <Button type="primary" htmlType="submit">
                   Register
-          </Button>
+                </Button>
               </Form.Item>
               <Icon type="arrow-left" onClick={this.props.switchView} />
             </Form>
