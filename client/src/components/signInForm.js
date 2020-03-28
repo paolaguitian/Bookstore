@@ -20,7 +20,7 @@ const SignIn = (props) =>  {
               localStorage.setItem('token', res.data.accessToken)
               localStorage.setItem('user', JSON.stringify(res.data.user))
               setState({
-                user:localStorage.getItem('user'),
+                user: JSON.parse(localStorage.getItem('user')),
                 isLoggedIn: localStorage.getItem('token')
               });
               props.history.push('/dashboard');
@@ -49,6 +49,7 @@ const SignIn = (props) =>  {
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
+              initialValue: 'sssss'
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
