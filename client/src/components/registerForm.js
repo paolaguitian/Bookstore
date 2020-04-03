@@ -142,6 +142,7 @@ class Register extends Component {
                       required: true,
                       message: 'Please input your password!',
                     },
+                    { min: 5, message: 'Username must be minimum 6 characters.' },
                     {
                       validator: this.validateToNextPassword,
                     },

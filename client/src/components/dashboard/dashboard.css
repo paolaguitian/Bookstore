@@ -3,3 +3,23 @@
   flex-direction: column;
   align-items: center;
 }
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-row {
+  display:flex;
+}
+
+.extra-field-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-text {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px;
+}

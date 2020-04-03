@@ -2,34 +2,13 @@ import React, { useContext } from 'react';
 import './dashboard.css';
 import UserContext from '../../context';
 import { Form, Icon, Input, Button } from 'antd';
+import ExtraField from './extraField';
 
 
 const DashboardForm = (props) => {
   const { getFieldDecorator } = props.form;
   const userState = useContext(UserContext);
   const user = userState.state.user;
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 8 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 16 },
-    },
-  };
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0,
-      },
-      sm: {
-        span: 16,
-        offset: 8,
-      },
-    },
-  };
 
 
   const handleSubmit = (e) => {
@@ -45,7 +24,7 @@ const DashboardForm = (props) => {
         {getFieldDecorator('username', {
           rules: [{ required: true, message: 'Please input your username!' }],
           initialValue: user.username,
-        })(<Input/>)}
+        })(<Input />)}
       </Form.Item>
     )
   }
@@ -112,21 +91,7 @@ const DashboardForm = (props) => {
       </Form.Item>
     )
   }
-  const renderHomeAddress = () => {
-    return (
-      <Form.Item label="Home Address">
-        {getFieldDecorator('homeAddress', {
-          initialValue: user.homeAddress,
-          rules: [
-            {
-              required: true,
-              message: 'Please input your Home Address!'
-            },
-          ],
-        })(<Input />)}
-      </Form.Item>
-    )
-  }
+
   const renderPhoneNumber = () => {
     return (
       <Form.Item label="Phone Number">
@@ -143,22 +108,36 @@ const DashboardForm = (props) => {
     )
   }
 
-
   return (
     <div className="profile-container">
       <h1>{`${user.firstName}'s Profile`}</h1>
       <Form
-        {...formItemLayout}
+        className="form-section"
         onSubmit={(e) => handleSubmit(e)}
       >
-        {renderUsername()}
-        {renderFirstName()}
-        {renderLastName()}
-        {renderEmail()}
-        {renderPassword()}
-        {renderHomeAddress()}
-        {renderPhoneNumber()}
-        <Form.Item {...tailFormItemLayout}>
+        <div className="input-row">
+          {renderUsername()}
+          {renderFirstName()}
+          {renderLastName()}
+        </div>
+        <div className="input-row">
+          {renderEmail()}
+          {renderPassword()}
+          {renderPhoneNumber()}
+
+        </div>
+        <ExtraField
+          diffInitValue='homeAddress'
+          name='Shipping Address'
+          field='shippingAddress'
+          getFieldDecorator={getFieldDecorator}
+        />
+        <ExtraField
+          name='Credit Card'
+          field='creditCard'
+          getFieldDecorator={getFieldDecorator}
+        />
+        <Form.Item>
           <Button type="primary" htmlType="submit">
             Update
           </Button>
