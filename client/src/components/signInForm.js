@@ -6,7 +6,6 @@ import { Alert } from 'antd';
 import { withRouter } from 'react-router';
 
 
-
 const SignIn = (props) =>  {
     const { getFieldDecorator } = props.form;
     const [formError, showError] = useState(null);
@@ -49,7 +48,6 @@ const SignIn = (props) =>  {
           <Form.Item>
             {getFieldDecorator('username', {
               rules: [{ required: true, message: 'Please input your username!' }],
-              initialValue: 'sssss'
             })(
               <Input
                 prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}

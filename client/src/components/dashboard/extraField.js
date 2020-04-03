@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { Form, Input } from 'antd';
+import { Form, Input, Button } from 'antd';
 import UserContext from '../../context';
 
 
 const ExtraField = (props) => {
   const [ fields, setFields ] = useState([]);
-  const { name, field, getFieldDecorator, diffInitValue } = props;
+  const { name, field, getFieldDecorator, diffInitValue,setDirty} = props;
   const userState = useContext(UserContext);
   const user = userState.state.user;
 
@@ -14,7 +14,7 @@ const ExtraField = (props) => {
       <Form.Item label={name}>
         {getFieldDecorator(field, {
           initialValue: diffInitValue ? user[diffInitValue] : user.field,
-        })(<Input />)}
+        })(<Input onChange={() => setDirty(true)}/>)}
       </Form.Item>
     )
   }
@@ -30,9 +30,9 @@ const ExtraField = (props) => {
     return fields.map((item, index) => (
       <>
         <Form.Item key={`extra-${field}-${index}`} label={`${name} ${index = index + 1}`}>
-          {getFieldDecorator(`${field}-${index}`, {
-            initialValue: user.field ? `${user[field]}-${index}`: '',
-          })(<Input />)}
+          {getFieldDecorator(`${field}${index}`, {
+            initialValue: user.field ? `${user[field]}${index}`: '',
+          })(<Input onChange={() => setDirty(true)}/>)}
         </Form.Item>
       </>
     ))

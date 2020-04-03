@@ -1,20 +1,50 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import './dashboard.css';
 import UserContext from '../../context';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 import ExtraField from './extraField';
+import axios from 'axios';
+import isEmpty from 'lodash';
 
 
 const DashboardForm = (props) => {
   const { getFieldDecorator } = props.form;
   const userState = useContext(UserContext);
   const user = userState.state.user;
+  const [dirty, setDirty] = useState(false)
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e, setState) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
-      console.log(values)
+      const userID = user.userID
+      values = {...values, userID}
+      const updatedValues = {};
+
+      if(dirty) {
+        if (values.shippingAddress1) {
+          axios.post('api/user/create/ship', values)
+          .then((res) => {
+            console.log(res.data)
+            updatedValues = {...updatedValues, shippingAddress1: res.data.street}
+          })
+          .catch((err) =>{
+            console.log("Could not update Ship")
+          })
+        }
+        if (values.creditCard) {
+          axios.post('api/user/create/card', values)
+          .then((res) => {
+            updatedValues = {...updatedValues, creditCard: res.data.cardNumber}
+            console.log(updatedValues)
+          })
+          .catch((err) =>{
+            console.log(updatedValues)
+          })
+        }
+
+      }
+
     });
   };
 
@@ -24,7 +54,7 @@ const DashboardForm = (props) => {
         {getFieldDecorator('username', {
           rules: [{ required: true, message: 'Please input your username!' }],
           initialValue: user.username,
-        })(<Input />)}
+        })(<Input onChange={() => setDirty(true)} />)}
       </Form.Item>
     )
   }
@@ -40,7 +70,7 @@ const DashboardForm = (props) => {
               message: 'Please input your name!'
             },
           ],
-        })(<Input />)}
+        })(<Input onChange={() => setDirty(true)} />)}
       </Form.Item>
     )
   }
@@ -56,7 +86,7 @@ const DashboardForm = (props) => {
               message: 'Please input your last name!'
             },
           ],
-        })(<Input />)}
+        })(<Input onChange={() => setDirty(true)} />)}
       </Form.Item>
     )
   }
@@ -72,22 +102,7 @@ const DashboardForm = (props) => {
               message: 'Please input your email!'
             },
           ],
-        })(<Input />)}
-      </Form.Item>
-    )
-  }
-  const renderPassword = () => {
-    return (
-      <Form.Item label="Password">
-        {getFieldDecorator('password', {
-          initialValue: user.password,
-          rules: [
-            {
-              required: true,
-              message: 'Please input your password!'
-            },
-          ],
-        })(<Input.Password />)}
+        })(<Input onChange={() => setDirty(true)} />)}
       </Form.Item>
     )
   }
@@ -103,47 +118,53 @@ const DashboardForm = (props) => {
               message: 'Please input your Phone Number!'
             },
           ],
-        })(<Input />)}
+        })(<Input onChange={() => setDirty(true)} />)}
       </Form.Item>
     )
   }
 
   return (
+    <UserContext.Consumer>
+      {({setState}) => (
     <div className="profile-container">
-      <h1>{`${user.firstName}'s Profile`}</h1>
-      <Form
-        className="form-section"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <div className="input-row">
-          {renderUsername()}
-          {renderFirstName()}
-          {renderLastName()}
-        </div>
-        <div className="input-row">
-          {renderEmail()}
-          {renderPassword()}
-          {renderPhoneNumber()}
+    <h1>{`${user.firstName}'s Profile`}</h1>
+    <Form
+      className="form-section"
+      onSubmit={(e) => handleSubmit(e, setState)}
+    >
+      <div className="input-row">
+        {renderUsername()}
+        {renderFirstName()}
+        {renderLastName()}
+      </div>
+      <div className="input-row">
+        {renderEmail()}
+        {renderPhoneNumber()}
+      </div>
+      <ExtraField
+        diffInitValue='homeAddress'
+        name='Shipping Address'
+        field='shippingAddress'
+        getFieldDecorator={getFieldDecorator}
+        setDirty={setDirty}
+      />
+      <ExtraField
+        name='Credit Card'
+        field='creditCard'
+        getFieldDecorator={getFieldDecorator}
+        setDirty={setDirty}
+      />
+      <Form.Item>
+        <Button type="primary" htmlType="submit" disabled={!dirty}>
+          Update
+        </Button>
+      </Form.Item>
+    </Form>
+  </div>
 
-        </div>
-        <ExtraField
-          diffInitValue='homeAddress'
-          name='Shipping Address'
-          field='shippingAddress'
-          getFieldDecorator={getFieldDecorator}
-        />
-        <ExtraField
-          name='Credit Card'
-          field='creditCard'
-          getFieldDecorator={getFieldDecorator}
-        />
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Update
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+      )}
+    </UserContext.Consumer>
+
 
   )
 }

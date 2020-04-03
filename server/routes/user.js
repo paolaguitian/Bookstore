@@ -65,5 +65,45 @@ router.post('/create', async(req, res) => {
 
   });
 
+  router.post('/create/ship', async(req, res) => {
+    const shipModel = req.context.models.ShippingAddress;
+    const { shippingAddress1, userID } = req.body;
+
+    const [add, created] = await shipModel.findOrCreate({
+      where: {userUserID: userID},
+      defaults: {
+        street: shippingAddress1,
+        city: ' ',
+        state: ' ',
+        zipcode: ' ',
+        country: ' ',
+      }
+    });
+
+    if (created) {
+      return res.status(200).json(add);
+    } else
+      res.status(400).json("Unable to Save Address")
+  });
+
+  router.post('/create/card', async(req, res) => {
+    const creditModel = req.context.models.CreditCard;
+    const { creditCard, userID } = req.body;
+
+    const [card, created] = await creditModel.findOrCreate({
+      where: {userUserID: userID},
+      defaults: {
+        cardNumber: creditCard,
+        cvc: ' ',
+        expDate: ' ',
+      }
+    });
+
+    if (created) {
+      return res.status(200).json(card);
+    } else
+      res.status(400).json("Unable to Save Address")
+  });
+
 
 export default router;
