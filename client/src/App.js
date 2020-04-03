@@ -8,7 +8,7 @@ import Home from './views/home/home';
 import NavBar from './components/navbar';
 import AboutUs from './views/aboutus/aboutus'
 import BookDetails from './components/bookdetails';
-import Dashboard from './components/dashboard';
+import Dashboard from './components/dashboard/dashboard';
 import AuthorCatalog from './components/authordetails/authorcatalog';
 import './App.css';
 import UserContext from './context';
@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: {},
+      user: JSON.parse(localStorage.getItem('user')),
       isLoggedIn: localStorage.getItem('token'),
     };
   }

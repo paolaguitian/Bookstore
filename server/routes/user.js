@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import createToken from '../config/authenticate';
-
+import bcrypt from 'bcrypt';
 
 const router = Router();
 
@@ -31,7 +31,7 @@ router.post('/create', async(req, res) => {
         lastName: lastName,
         email: email,
         username: username,
-        password: password,
+        password: await bcrypt.hash(password,10),
         homeAddress: homeAddress,
         phoneNumber: phoneNumber
       }
@@ -49,13 +49,12 @@ router.post('/create', async(req, res) => {
   router.post('/read', async(req, res) => {
     const userModel = req.context.models.User;
     const { username, password } = req.body;
-
      await userModel.findOne({
       where: {
         username: username,
       }
     }).then(user => {
-        if (user.password === password) {
+        if (bcrypt.compare(password, user.password)) {
           const token = createToken(user);
           res.status(200).json({user, accessToken: token})
         } else
@@ -65,5 +64,46 @@ router.post('/create', async(req, res) => {
     })
 
   });
+
+  router.post('/create/ship', async(req, res) => {
+    const shipModel = req.context.models.ShippingAddress;
+    const { shippingAddress1, userID } = req.body;
+
+    const [add, created] = await shipModel.findOrCreate({
+      where: {userUserID: userID},
+      defaults: {
+        street: shippingAddress1,
+        city: ' ',
+        state: ' ',
+        zipcode: ' ',
+        country: ' ',
+      }
+    });
+
+    if (created) {
+      return res.status(200).json(add);
+    } else
+      res.status(400).json("Unable to Save Address")
+  });
+
+  router.post('/create/card', async(req, res) => {
+    const creditModel = req.context.models.CreditCard;
+    const { creditCard, userID } = req.body;
+
+    const [card, created] = await creditModel.findOrCreate({
+      where: {userUserID: userID},
+      defaults: {
+        cardNumber: creditCard,
+        cvc: ' ',
+        expDate: ' ',
+      }
+    });
+
+    if (created) {
+      return res.status(200).json(card);
+    } else
+      res.status(400).json("Unable to Save Address")
+  });
+
 
 export default router;

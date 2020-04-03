@@ -6,7 +6,6 @@ import { Alert } from 'antd';
 import { withRouter } from 'react-router';
 
 
-
 const SignIn = (props) =>  {
     const { getFieldDecorator } = props.form;
     const [formError, showError] = useState(null);
@@ -17,10 +16,10 @@ const SignIn = (props) =>  {
         if (!err) {
           axios.post('/api/user/read', values)
             .then((res) => {
-              const data = res.data;
-              localStorage.setItem('token', data.accessToken)
+              localStorage.setItem('token', res.data.accessToken)
+              localStorage.setItem('user', JSON.stringify(res.data.user))
               setState({
-                user: data.user,
+                user: JSON.parse(localStorage.getItem('user')),
                 isLoggedIn: localStorage.getItem('token')
               });
               props.history.push('/dashboard');
