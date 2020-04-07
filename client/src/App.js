@@ -13,6 +13,7 @@ import AuthorCatalog from './components/authordetails/authorcatalog';
 import './App.css';
 import UserContext from './context';
 import ProtectedRoute from './components/protectedRoute';
+import BookCatalog from './components/bookcatalog';
 
 
 class App extends Component {
@@ -36,7 +37,7 @@ class App extends Component {
            <Switch>
             <Route path="/" exact component={Home} />
              <Route path="/home" exact component={Home} />
-             <Route path="/shop" exact component={Home} />
+             <Route path="/shop" exact component={BookCatalog} />
              <Route path="/about" exact component={AboutUs} />
              <Route path="/bookdetails/:bookID" exact component={BookDetails} />
              <Route path="/authorlisting/:authorID" component={AuthorCatalog} />
