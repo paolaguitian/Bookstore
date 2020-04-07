@@ -1,6 +1,7 @@
 @import '~antd/dist/antd.css';
 
 .maincontent {
-    padding-top: 100px;
+    padding-top: 6vh;
+    position: relative;
 }
 
