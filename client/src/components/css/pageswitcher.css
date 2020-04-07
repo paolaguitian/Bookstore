@@ -1,35 +1,35 @@
 .pager {
-	display: table;
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
+   display: table;
+   margin: 0 auto;
+   width: 100%;
+   text-align: center;
 }
 
 .pagination {
-	list-style-type: none;
-	padding: 10px 10px;
+   list-style-type: none;
+   padding: 10px 10px;
 }
 
 .pagebutton {
-	display: inline-table;
+   display: inline-table;
 }
 
 .pagination .pagebutton a {
-	display: inline-table;
-	padding: 14px 16px;
-	text-decoration: none;
-	color: #303030;
+   display: inline-table;
+   padding: 14px 16px;
+   text-decoration: none;
+   color: #303030;
 }
 
 .pagination .pagebutton:hover {
-	background-color: cornflowerblue;
+   background-color: cornflowerblue;
 }
 
 .active {
-	background-color: cornflowerblue;
-	color: white;
+   background-color: cornflowerblue;
+   color: white;
 }
 
 .invisible {
-	display: none;
+   display: none;
 }
