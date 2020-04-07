@@ -1,36 +1,36 @@
 .bookCard {
-	width: 17em;
-	/*display: inline-block;
+   width: 17em;
+   /*display: inline-block;
     justify-content: space-evenly;*/
-	text-align: left;
-	padding-bottom: 10vh;
-	margin-bottom: 5vh;
+   text-align: left;
+   padding-bottom: 10vh;
+   margin-bottom: 5vh;
 }
 
 .bookCard img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 90%;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 90%;
 }
 
 .bookCard .bookPageLink {
-	text-align: center;
-	display: inline-block;
+   text-align: center;
+   display: inline-block;
 }
 
 .bookCover {
-	height: 16em;
-	width: 12em;
-	margin-bottom: 30px;
+   height: 16em;
+   width: 12em;
+   margin-bottom: 30px;
 }
 
 .infoTag {
-	font-style: italic;
-	color: grey;
+   font-style: italic;
+   color: grey;
 }
 
 .authorTag {
-	color: grey;
-	text-align: left;
+   color: grey;
+   text-align: left;
 }
