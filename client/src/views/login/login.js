@@ -1,68 +1,51 @@
-import React, { Component } from 'react';
-import { Button, Modal } from 'antd';
+import React, { useState } from 'react';
+import { Button, Modal, Dropdown, Menu } from 'antd';
 import SignInForm from '../../components/signInForm';
 import RegisterForm from '../../components/registerForm';
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      showModal: false,
-      showRegister: false,
-    }
-  }
+const Login = (props) => {
+  const [showModal, setModal] = useState(false)
+  const [showRegister, setRegister] = useState(false)
 
-  openModal = () => {
-    this.setState({
-      showModal: true,
-    })
-  }
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a href="/dashboard">
+          Dashboard
+        </a>
+      </Menu.Item>
+      <Menu.Item onClick={props.logout}>
+        Logout
+      </Menu.Item>
+    </Menu>
+  );
 
-  closeModal = () => {
-    this.setState({
-      showModal: false,
-    })
-  }
-
-  switchToRegister = () => {
-    this.setState({
-      showRegister: true
-    })
-  }
-
-  switchToSignIn = () => {
-    this.setState({
-      showRegister: false
-    })
-  }
-
-  submitForm = () => {
-    console.log("write the logic to submit form to create user or log them in")
-  }
-
-  render() {
-    return (
+  return (
+    props.isLoggedIn ?
+      <Dropdown overlay={menu} placement="bottomCenter">
+        <Button icon="user"/>
+      </Dropdown>
+      :
       <div>
         <Button
           type="dashed"
           icon="user"
-          onClick={this.openModal}>
+          onClick={() => setModal(true)}>
           Hello, Sign In
-        </Button>
+       </Button>
         <Modal
           title="Sign in or Create an Account"
-          visible={this.state.showModal}
-          onOk={this.submitForm}
-          onCancel={this.closeModal}
+          visible={showModal}
+          onCancel={() => setModal(false)}
           footer={null}
         >
-          {this.state.showRegister ?
-            <RegisterForm switchView={this.switchToSignIn}/> :
-            <SignInForm switchView={this.switchToRegister}/>}
+          {showRegister ?
+            <RegisterForm switchView={() => setRegister(false)} /> :
+            <SignInForm switchView={() => setRegister(true)} />
+          }
         </Modal>
       </div>
-    )
-  }
+  );
 }
 
 export default Login;

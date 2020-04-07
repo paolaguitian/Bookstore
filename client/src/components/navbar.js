@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import SearchBox from '../views/search/search';
 import Login from '../views/login/login';
 
-const NavBar = () => {
+const NavBar = (props) => {
 	return (
 		<div className="container">
 			<nav>
@@ -27,7 +27,7 @@ const NavBar = () => {
 						<NavLink to="/about">About Us</NavLink>
 					</li>
 					<li className="navlogin">
-						<Login />
+						<Login isLoggedIn={props.isLoggedIn} logout={props.logout} />
 					</li>
 					<li className="navsearch">
 						<SearchBox />
