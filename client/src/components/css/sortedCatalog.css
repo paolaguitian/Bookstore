@@ -1,0 +1,14 @@
+.sorted-catalog-container {
+   min-height: 80%;
+   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.sorted-catalog-cards {
+   justify-content: space-evenly;
+   align-items: center;
+}
+
+.pagination {
+   width: 100%;
+   text-align: center;
+}

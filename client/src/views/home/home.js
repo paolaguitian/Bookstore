@@ -2,7 +2,8 @@ import React from 'react';
 import './home.css';
 import SearchBox from '../search/search';
 import Login from '../login/login';
-import BookCatalog from '../../components/bookcatalog';
+import SortedCatalog from '../../components/sortedCatalog';
+import Sorter from '../../components/sorter';
 
 
 const Home = (props) =>  {
@@ -12,11 +13,13 @@ const Home = (props) =>  {
         <div className="topBar">
           <div className="title">Bookstore 12</div>
           <SearchBox/>
+          
           <Login />
     </div>*/}
+    <Sorter />
         <div className="booksBar">
           {/* render bookInfo component  */}
-          <BookCatalog />
+          <SortedCatalog />
         </div>
       </div>
     );

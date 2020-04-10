@@ -11,6 +11,13 @@ router.get('/all', async (req, res) => {
     return res.json({pager, pageOfBooks});
 });
 
+
+router.get('/allNoPages', async (req, res) => {
+    const allBooks = await req.context.models.Book.findAll();
+    const numBooks = allBooks.length;
+    return res.json({numBooks, allBooks});
+});
+
 router.get('/:isbn', async (req, res) => {
     const bookID = req.params.isbn;
     const book = await req.context.models.Book.findByPk(bookID);
