@@ -6,20 +6,25 @@ import { LoadingOutlined } from '@ant-design/icons';
 import BookCard from './bookcard';
 import Sorter from '../components/sorter';
 
+var sortByProperty = function (property) {
+   return function (x, y) {
+      return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+   };
+};
+
 class SortedCatalog extends Component {
    constructor(props) {
       super(props);
       this.state = {
          numBooks: -1,
          allBooks: [],
-         genre: '-1',
-         sort: '',
+         genre: 'Education',
+         sort: 'date ascending',
          loading: true,
       };
    }
 
    getPageOfBooks = () => {
-      
       if (this.state.genre === '-1') {
          axios
             .get('/api/books/allNoPages')
@@ -29,6 +34,7 @@ class SortedCatalog extends Component {
                   allBooks: res.data.allBooks,
                   loading: false,
                });
+               this.sortBy()
             })
             .catch((error) => {
                console.log(error);
@@ -42,11 +48,41 @@ class SortedCatalog extends Component {
                   allBooks: res.data.allBooks,
                   loading: false,
                });
+               this.sortBy()
             })
             .catch((error) => {
                console.log(error);
             });
       }
+   };
+
+   sortBy = () => {
+      const order = this.state.sort.split(" ").splice(-1)[0];
+      const category = this.state.sort.split(" ").splice(0)[0];
+      var sorted = this.state.allBooks;
+      //not handling ratings
+      switch (category) {
+         case "title":
+            sorted.sort(sortByProperty("title"));
+            break;
+         case "date":
+            sorted.sort(sortByProperty("releaseDate"));
+            break;
+         case "price":
+            sorted.sort(sortByProperty("price"));
+            break;
+         case "author":
+            sorted.sort(sortByProperty("author"));
+            break;
+         default:
+            //ratings error catch
+      }
+
+      if (order === "descending") {
+         sorted.reverse();
+      }
+      this.setState({ allBooks: sorted });
+      console.log(sorted);
    };
 
    componentDidMount() {

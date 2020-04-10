@@ -17,23 +17,23 @@ const { SubMenu } = Menu;
 
 const menu = (
   <Menu onClick={handleClick} >
-    <SubMenu title="ratings" key="1">
+    <SubMenu title="ratings">
       <Menu.Item key="rating ascending">ascending</Menu.Item>
       <Menu.Item key="rating descending">descending</Menu.Item>
     </SubMenu>
-    <SubMenu title="title" key="2">
+    <SubMenu title="title">
       <Menu.Item key="title ascending">ascending</Menu.Item>
       <Menu.Item key="title descending">descending</Menu.Item>
     </SubMenu>
-    <SubMenu title="price" key="3">
+    <SubMenu title="price">
       <Menu.Item key="price ascending">ascending</Menu.Item>
       <Menu.Item key="price descening">descending</Menu.Item>
     </SubMenu>
-    <SubMenu title="date" key="4">
+    <SubMenu title="date">
       <Menu.Item key="date ascending">ascending</Menu.Item>
       <Menu.Item key="date descending">descending</Menu.Item>
     </SubMenu>
-    <SubMenu title="author" key="5">
+    <SubMenu title="author">
       <Menu.Item key="author ascending">ascending</Menu.Item>
       <Menu.Item key="author descending">descending</Menu.Item>
     </SubMenu>
