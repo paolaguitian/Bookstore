@@ -12,7 +12,8 @@ class SortedCatalog extends Component {
       this.state = {
          numBooks: -1,
          allBooks: [],
-         genre: 'Action',
+         genre: '-1',
+         sort: '',
          loading: true,
       };
    }

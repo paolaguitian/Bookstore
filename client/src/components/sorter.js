@@ -6,31 +6,37 @@ import { DownOutlined, UserOutlined } from '@ant-design/icons';
 
 function handleClick(e) {
   message.info('Click on menu item.');
-  console.log('click', e);
+  console.log('sort by', e.key);
 }
 
 function onChange(e) {
-  console.log(`radio checked:${e.target.value}`);
+  console.log(`display books from ${e.target.value} genre`);
 }
 
+const { SubMenu } = Menu;
+
 const menu = (
-  <Menu onClick={handleClick}>
-    <Menu.Item key="1">
-      <UserOutlined />
-      ratings, high to low
-    </Menu.Item>
-    <Menu.Item key="2">
-      <UserOutlined />
-      ratings, low to high
-    </Menu.Item>
-    <Menu.Item key="3">
-      <UserOutlined />
-      title, alphabetically
-    </Menu.Item>
-    <Menu.Item key="4">
-      <UserOutlined />
-      author, alphabetically
-    </Menu.Item>
+  <Menu onClick={handleClick} >
+    <SubMenu title="ratings" key="1">
+      <Menu.Item key="rating ascending">ascending</Menu.Item>
+      <Menu.Item key="rating descending">descending</Menu.Item>
+    </SubMenu>
+    <SubMenu title="title" key="2">
+      <Menu.Item key="title ascending">ascending</Menu.Item>
+      <Menu.Item key="title descending">descending</Menu.Item>
+    </SubMenu>
+    <SubMenu title="price" key="3">
+      <Menu.Item key="price ascending">ascending</Menu.Item>
+      <Menu.Item key="price descening">descending</Menu.Item>
+    </SubMenu>
+    <SubMenu title="date" key="4">
+      <Menu.Item key="date ascending">ascending</Menu.Item>
+      <Menu.Item key="date descending">descending</Menu.Item>
+    </SubMenu>
+    <SubMenu title="author" key="5">
+      <Menu.Item key="author ascending">ascending</Menu.Item>
+      <Menu.Item key="author descending">descending</Menu.Item>
+    </SubMenu>
   </Menu>
 );
 
