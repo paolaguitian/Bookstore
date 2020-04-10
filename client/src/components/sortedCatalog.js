@@ -4,7 +4,7 @@ import axios from 'axios';
 import { List, Spin, Pagination } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BookCard from './bookcard';
-import Sorter from './sorter.js';
+import Sorter from '../components/sorter';
 
 class SortedCatalog extends Component {
    constructor(props) {
@@ -12,30 +12,45 @@ class SortedCatalog extends Component {
       this.state = {
          numBooks: -1,
          allBooks: [],
+         genre: 'Action',
          loading: true,
       };
    }
 
    getPageOfBooks = () => {
-      axios
-         .get('/api/books/allNoPages')
-         .then((res) => {
-            this.setState({
-               numBooks: res.data.numBooks,
-               allBooks: res.data.allBooks,
-               loading: false,
+      
+      if (this.state.genre === '-1') {
+         axios
+            .get('/api/books/allNoPages')
+            .then((res) => {
+               this.setState({
+                  numBooks: res.data.numBooks,
+                  allBooks: res.data.allBooks,
+                  loading: false,
+               });
+            })
+            .catch((error) => {
+               console.log(error);
             });
-         })
-         .catch((error) => {
-            console.log(error);
-         });
-
+      } else {
+         axios
+            .get(`/api/books/genre/${this.state.genre}`)
+            .then((res) => {
+               this.setState({
+                  numBooks: res.data.numBooks,
+                  allBooks: res.data.allBooks,
+                  loading: false,
+               });
+            })
+            .catch((error) => {
+               console.log(error);
+            });
+      }
    };
 
    componentDidMount() {
       this.getPageOfBooks();
    }
-
 
    render() {
       const { numBooks, allBooks, loading } = this.state;
@@ -44,6 +59,7 @@ class SortedCatalog extends Component {
       if (numBooks > 0 && loading === false) {
          return (
             <div className="sorted-catalog-container">
+               <Sorter />
                <div className="sorted-catalog-cards">
                   <List
                      grid={{
@@ -66,15 +82,15 @@ class SortedCatalog extends Component {
                      )}
                   />
                </div>
-            <div className="pagination">
-               <Pagination size="large" total={numBooks} showSizeChanger />
+               <div className="pagination">
+                  <Pagination size="large" total={numBooks} showSizeChanger />
                </div>
             </div>
          );
       } else if (loading === true) {
          return (
-            <div className="book-catalog-container">
-               <div className="book-catalog-cards">
+            <div className="sorted-catalog-container">
+               <div className="sorted-catalog-cards">
                   <Spin
                      indicator={spinnerIcon}
                      style={{ textAlign: 'center' }}

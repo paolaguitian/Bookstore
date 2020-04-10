@@ -28,8 +28,3 @@ body {
 .title {
   font-size: x-large;
 }
-
-.booksBar {
-  display: flex;
-  justify-content: space-evenly;
-}
