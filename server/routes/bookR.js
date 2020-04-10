@@ -40,7 +40,7 @@ router.get('/authorbooks/:authorID', async (req, res) => {
 
 router.get('/genre/:genre', async (req, res) => {
     const genre = req.params.genre;
-    const books = await req.context.models.Book.findAll({
+    const allBooks = await req.context.models.Book.findAll({
         attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher'],    
         where: {
             genre: genre
