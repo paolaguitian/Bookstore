@@ -4,7 +4,6 @@ import axios from 'axios';
 import { List, Spin, Pagination } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import BookCard from './bookcard';
-import Sorter from '../components/sorter';
 
 var sortByProperty = function (property) {
    return function (x, y) {
@@ -18,14 +17,14 @@ class SortedCatalog extends Component {
       this.state = {
          numBooks: -1,
          allBooks: [],
-         genre: 'Education',
-         sort: 'date ascending',
+         genre: props.passgenre,
+         sort: 'price ascending',
          loading: true,
       };
    }
 
-   getPageOfBooks = () => {
-      if (this.state.genre === '-1') {
+   getPageOfBooks = (genre) => {
+      if (genre === '-1'|| genre === undefined) {
          axios
             .get('/api/books/allNoPages')
             .then((res) => {
@@ -34,21 +33,19 @@ class SortedCatalog extends Component {
                   allBooks: res.data.allBooks,
                   loading: false,
                });
-               this.sortBy()
             })
             .catch((error) => {
                console.log(error);
             });
       } else {
          axios
-            .get(`/api/books/genre/${this.state.genre}`)
+            .get(`/api/books/genre/${genre}`)
             .then((res) => {
                this.setState({
                   numBooks: res.data.numBooks,
                   allBooks: res.data.allBooks,
                   loading: false,
                });
-               this.sortBy()
             })
             .catch((error) => {
                console.log(error);
@@ -81,12 +78,20 @@ class SortedCatalog extends Component {
       if (order === "descending") {
          sorted.reverse();
       }
+
       this.setState({ allBooks: sorted });
-      console.log(sorted);
+
    };
 
    componentDidMount() {
       this.getPageOfBooks();
+   }
+
+   componentDidUpdate(prevProps) {
+      if (prevProps.passgenre !== this.props.passgenre)
+      {
+         this.getPageOfBooks(this.props.passgenre);
+      }
    }
 
    render() {
@@ -95,8 +100,7 @@ class SortedCatalog extends Component {
 
       if (numBooks > 0 && loading === false) {
          return (
-            <div className="sorted-catalog-container">
-               <Sorter />
+            <div >
                <div className="sorted-catalog-cards">
                   <List
                      grid={{

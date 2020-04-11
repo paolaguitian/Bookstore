@@ -8,7 +8,7 @@ const NavBar = (props) => {
    return (
       <div className="container">
          <nav>
-            <label id="hamburger-icon" for="hamburger">
+            <label id="hamburger-icon" htmlFor="hamburger">
                &#9776;
             </label>
             <input type="checkbox" id="hamburger" />
