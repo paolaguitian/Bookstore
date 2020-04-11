@@ -17,13 +17,12 @@ class SortedCatalog extends Component {
       this.state = {
          numBooks: -1,
          allBooks: [],
-         genre: props.passgenre,
-         sort: 'price ascending',
+         sort: 'title descending',
          loading: true,
       };
    }
 
-   getPageOfBooks = (genre) => {
+   getPageOfBooks = (genre, sort) => {
       if (genre === '-1'|| genre === undefined) {
          axios
             .get('/api/books/allNoPages')
@@ -33,6 +32,7 @@ class SortedCatalog extends Component {
                   allBooks: res.data.allBooks,
                   loading: false,
                });
+               this.sortBy(sort);
             })
             .catch((error) => {
                console.log(error);
@@ -46,6 +46,7 @@ class SortedCatalog extends Component {
                   allBooks: res.data.allBooks,
                   loading: false,
                });
+               this.sortBy(sort);
             })
             .catch((error) => {
                console.log(error);
@@ -53,9 +54,9 @@ class SortedCatalog extends Component {
       }
    };
 
-   sortBy = () => {
-      const order = this.state.sort.split(" ").splice(-1)[0];
-      const category = this.state.sort.split(" ").splice(0)[0];
+   sortBy = (sort) => {
+      const order = sort.split(" ").splice(-1)[0];
+      const category = sort.split(" ").splice(0)[0];
       var sorted = this.state.allBooks;
       //not handling ratings
       switch (category) {
@@ -72,7 +73,6 @@ class SortedCatalog extends Component {
             sorted.sort(sortByProperty("author"));
             break;
          default:
-            //ratings error catch
       }
 
       if (order === "descending") {
@@ -80,17 +80,16 @@ class SortedCatalog extends Component {
       }
 
       this.setState({ allBooks: sorted });
-
-   };
+   }; 
 
    componentDidMount() {
-      this.getPageOfBooks();
+      this.getPageOfBooks(this.props.passgenre, this.props.passsort);
    }
 
    componentDidUpdate(prevProps) {
-      if (prevProps.passgenre !== this.props.passgenre)
+      if ((prevProps.passgenre !== this.props.passgenre )|| (prevProps.passsort !== this.props.passsort ))
       {
-         this.getPageOfBooks(this.props.passgenre);
+         this.getPageOfBooks(this.props.passgenre, this.props.passsort);
       }
    }
 
