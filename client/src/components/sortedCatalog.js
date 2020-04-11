@@ -120,7 +120,7 @@ class SortedCatalog extends Component {
                   />
                </div>
                <div className="pagination">
-                  <Pagination size="large" total={numBooks} showSizeChanger />
+                  <Pagination size="large" total={numBooks} showSizeChanger defaultPageSize={numBooks} pageSizeOptions={['15', '30', '45']} />
                </div>
             </div>
          );
