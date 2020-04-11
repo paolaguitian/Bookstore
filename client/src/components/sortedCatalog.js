@@ -1,8 +1,7 @@
 import './css/sortedCatalog.css';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { List, Spin, Pagination } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { List, Pagination } from 'antd';
 import BookCard from './bookcard';
 
 var sortByProperty = function (property) {
@@ -92,7 +91,6 @@ class SortedCatalog extends Component {
 
    render() {
       const { numBooks, allBooks, loading } = this.state;
-      const spinnerIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 
       if (numBooks > 0 && loading === false) {
          return (
@@ -128,10 +126,7 @@ class SortedCatalog extends Component {
          return (
             <div className="sorted-catalog-container">
                <div className="sorted-catalog-cards">
-                  <Spin
-                     indicator={spinnerIcon}
-                     style={{ textAlign: 'center' }}
-                  />
+                  
                </div>
             </div>
          );
