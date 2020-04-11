@@ -1,0 +1,17 @@
+.sortingSelectors {
+    display: flex;
+    margin-top: -2em;
+    margin-bottom: 2em;
+}
+
+.radios {
+    text-align: left; 
+    margin-right: auto;
+    padding-left: 1em;
+}
+
+.filterby {
+    text-align: right;
+    margin-left: auto;
+    padding-right: 1em;
+}
