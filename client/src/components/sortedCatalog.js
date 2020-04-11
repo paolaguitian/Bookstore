@@ -6,7 +6,11 @@ import BookCard from './bookcard';
 
 var sortByProperty = function (property) {
    return function (x, y) {
-      return ((x[property] === y[property]) ? 0 : ((x[property] > y[property]) ? 1 : -1));
+      return x[property] === y[property]
+         ? 0
+         : x[property] > y[property]
+         ? 1
+         : -1;
    };
 };
 
@@ -22,7 +26,7 @@ class SortedCatalog extends Component {
    }
 
    getPageOfBooks = (genre, sort) => {
-      if (genre === '-1'|| genre === undefined) {
+      if (genre === '-1' || genre === undefined) {
          axios
             .get('/api/books/allNoPages')
             .then((res) => {
@@ -54,37 +58,39 @@ class SortedCatalog extends Component {
    };
 
    sortBy = (sort) => {
-      const order = sort.split(" ").splice(-1)[0];
-      const category = sort.split(" ").splice(0)[0];
+      const order = sort.split(' ').splice(-1)[0];
+      const category = sort.split(' ').splice(0)[0];
       var sorted = this.state.allBooks;
       //not handling ratings
       switch (category) {
-         case "title":
-            sorted.sort(sortByProperty("title"));
+         case 'title':
+            sorted.sort(sortByProperty('title'));
             break;
-         case "date":
-            sorted.sort(sortByProperty("releaseDate"));
+         case 'date':
+            sorted.sort(sortByProperty('releaseDate'));
             break;
-         case "price":
-            sorted.sort(sortByProperty("price"));
+         case 'price':
+            sorted.sort(sortByProperty('price'));
             break;
          default:
       }
 
-      if (order === "descending") {
+      if (order === 'descending') {
          sorted.reverse();
       }
 
       this.setState({ allBooks: sorted });
-   }; 
+   };
 
    componentDidMount() {
       this.getPageOfBooks(this.props.passgenre, this.props.passsort);
    }
 
    componentDidUpdate(prevProps) {
-      if ((prevProps.passgenre !== this.props.passgenre )|| (prevProps.passsort !== this.props.passsort ))
-      {
+      if (
+         prevProps.passgenre !== this.props.passgenre ||
+         prevProps.passsort !== this.props.passsort
+      ) {
          this.getPageOfBooks(this.props.passgenre, this.props.passsort);
       }
    }
@@ -94,7 +100,7 @@ class SortedCatalog extends Component {
 
       if (numBooks > 0 && loading === false) {
          return (
-            <div >
+            <div>
                <div className="sorted-catalog-cards">
                   <List
                      grid={{
@@ -108,26 +114,27 @@ class SortedCatalog extends Component {
                      }}
                      dataSource={allBooks}
                      renderItem={(book) => (
-                        <List.Item>
-                           <BookCard
-                              key={book.bookID}
-                              bookID={book.bookID}
-                           />
+                        <List.Item align="middle">
+                           <BookCard key={book.bookID} bookID={book.bookID} />
                         </List.Item>
                      )}
                   />
                </div>
                <div className="pagination">
-                  <Pagination size="large" total={numBooks} showSizeChanger defaultPageSize={numBooks} pageSizeOptions={['15', '30', '45']} />
+                  <Pagination
+                     size="large"
+                     total={numBooks}
+                     showSizeChanger
+                     defaultPageSize={numBooks}
+                     pageSizeOptions={['15', '30', '45']}
+                  />
                </div>
             </div>
          );
       } else if (loading === true) {
          return (
             <div className="sorted-catalog-container">
-               <div className="sorted-catalog-cards">
-                  
-               </div>
+               <div className="sorted-catalog-cards"></div>
             </div>
          );
       }

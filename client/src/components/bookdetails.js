@@ -1,7 +1,16 @@
 import './css/bookdetails.css';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Button, Card, Descriptions, Skeleton } from 'antd';
+import {
+   Button,
+   Card,
+   Comment,
+   Descriptions,
+   List,
+   Rate,
+   Skeleton,
+   Tooltip,
+} from 'antd';
 import AuthorInfo from './authordetails/authorinfo';
 
 class BookDetails extends Component {
@@ -113,6 +122,8 @@ class BookDetails extends Component {
                   <Skeleton loading={this.state.loading} active={true}>
                      <h1>{title}</h1>
                      <AuthorInfo data="link" authorAuthorID={authorAuthorID} />
+                     {/*Ratings have no connection to the backend. This is just the UI for it.*/}
+                     <Rate allowClear={false} allowHalf defaultValue={4.5} />
                      <br />
                      <h1>${price}</h1>
                      {stockStatus()}
@@ -156,6 +167,9 @@ class BookDetails extends Component {
                   {releaseDate}
                </Descriptions.Item>
             </Descriptions>
+            <h3 style={{ fontWeight: 'bold' }}>Reviews</h3>
+            <br />
+            <br />
          </div>
       );
    }
