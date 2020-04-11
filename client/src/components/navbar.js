@@ -29,9 +29,6 @@ const NavBar = (props) => {
                <li className="navlogin">
                   <Login isLoggedIn={props.isLoggedIn} logout={props.logout} />
                </li>
-               <li className="navsearch">
-                  <SearchBox />
-               </li>
             </ul>
          </nav>
       </div>
