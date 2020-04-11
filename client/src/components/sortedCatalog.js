@@ -69,9 +69,6 @@ class SortedCatalog extends Component {
          case "price":
             sorted.sort(sortByProperty("price"));
             break;
-         case "author":
-            sorted.sort(sortByProperty("author"));
-            break;
          default:
       }
 
