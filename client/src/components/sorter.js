@@ -1,7 +1,7 @@
 import './css/sorter.css';
 import React from 'react';
-import { Menu, Dropdown, Button, Radio, message } from 'antd';
-import { DownOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, Radio, Rate } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import SortedCatalog from "./sortedCatalog"
 
 const { SubMenu } = Menu;
@@ -12,11 +12,17 @@ class Sorter extends React.Component {
     this.state = {
       genre: '-1',
       sortby: "",
+      rating: 0,
     }
   }
   
   updateGenre = (e) => {
     this.setState({ genre: e.target.value });
+  }
+
+  updateRating = (e) => 
+  {
+    this.setState({ rating: e});
   }
 
  handleClick =(e) =>  {
@@ -43,6 +49,7 @@ class Sorter extends React.Component {
               <Radio.Button value="Romance">Romance</Radio.Button>
             </Radio.Group>
           </div>
+          <div> Min rating: &nbsp; <Rate defaultValue={0} onChange={this.updateRating}/>  </div>
           <div className="filterby">
             <Dropdown overlay={
               <Menu onClick={this.handleClick} >
@@ -71,7 +78,7 @@ class Sorter extends React.Component {
             </Dropdown>
           </div>
         </div>
-        <SortedCatalog passgenre={this.state.genre} passsort={this.state.sortby} location={this.props.location}/>
+        <SortedCatalog genre={this.state.genre} sort={this.state.sortby} location={this.props.location}/>
       </div>
     );
   }

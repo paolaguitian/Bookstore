@@ -23,7 +23,7 @@ class SortedCatalog extends Component {
       };
    }
 
-   getPageOfBooks = (genre, sort, location) => {
+   getPageOfBooks = (genre, sort, location, rating) => {
       if (location === "home") {
          if (genre === '-1' || genre === undefined) {
             axios
@@ -109,15 +109,15 @@ class SortedCatalog extends Component {
    };
 
    componentDidMount() {
-      this.getPageOfBooks(this.props.passgenre, this.props.passsort, this.props.location);
+      this.getPageOfBooks(this.props.genre, this.props.sort, this.props.location, this.props.rating);
    }
 
    componentDidUpdate(prevProps) {
       if (
-         prevProps.passgenre !== this.props.passgenre ||
-         prevProps.passsort !== this.props.passsort
+         prevProps.genre !== this.props.genre ||
+         prevProps.sort !== this.props.sort
       ) {
-         this.getPageOfBooks(this.props.passgenre, this.props.passsort, this.props.location);
+         this.getPageOfBooks(this.props.genre, this.props.sort, this.props.location, this.props.rating);
       }
    }
 
