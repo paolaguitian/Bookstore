@@ -19,9 +19,7 @@ class SortedCatalog extends Component {
       super(props);
       this.state = {
          numBooks: -1,
-         allBooks: [],
-         sort: 'title descending',
-         loading: true,
+         allBooks: []
       };
    }
 
@@ -32,8 +30,7 @@ class SortedCatalog extends Component {
             .then((res) => {
                this.setState({
                   numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks,
-                  loading: false,
+                  allBooks: res.data.allBooks
                });
                this.sortBy(sort);
             })
@@ -46,8 +43,7 @@ class SortedCatalog extends Component {
             .then((res) => {
                this.setState({
                   numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks,
-                  loading: false,
+                  allBooks: res.data.allBooks
                });
                this.sortBy(sort);
             })
@@ -96,9 +92,9 @@ class SortedCatalog extends Component {
    }
 
    render() {
-      const { numBooks, allBooks, loading } = this.state;
+      const { numBooks, allBooks} = this.state;
 
-      if (numBooks > 0 && loading === false) {
+      if (numBooks > 0 ) {
          return (
             <div>
                <div className="sorted-catalog-cards">
@@ -131,13 +127,8 @@ class SortedCatalog extends Component {
                </div>
             </div>
          );
-      } else if (loading === true) {
-         return (
-            <div className="sorted-catalog-container">
-               <div className="sorted-catalog-cards"></div>
-            </div>
-         );
       }
+      else { return (<div></div>); }
    }
 }
 
