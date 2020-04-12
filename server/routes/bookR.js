@@ -18,6 +18,18 @@ router.get('/allNoPages', async (req, res) => {
     return res.json({numBooks, allBooks});
 });
 
+router.get('/bestsellers', async (req, res) => {
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
+        where: {
+            isBestseller: 1
+            }
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
+
 router.get('/:isbn', async (req, res) => {
     const bookID = req.params.isbn;
     const book = await req.context.models.Book.findByPk(bookID);
