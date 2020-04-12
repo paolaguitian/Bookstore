@@ -6,7 +6,7 @@ import Sorter from '../../components/sorter';
 const Bestsellers = (props) =>  {
     return (
       <div className="container">
-        <Sorter />
+        <Sorter location="bestsellers"/>
       </div>
     );
 }

@@ -71,7 +71,7 @@ class Sorter extends React.Component {
             </Dropdown>
           </div>
         </div>
-        <SortedCatalog passgenre={this.state.genre} passsort={this.state.sortby}/>
+        <SortedCatalog passgenre={this.state.genre} passsort={this.state.sortby} location={this.props.location}/>
       </div>
     );
   }

@@ -9,8 +9,8 @@ var sortByProperty = function (property) {
       return x[property] === y[property]
          ? 0
          : x[property] > y[property]
-         ? 1
-         : -1;
+            ? 1
+            : -1;
    };
 };
 
@@ -23,33 +23,63 @@ class SortedCatalog extends Component {
       };
    }
 
-   getPageOfBooks = (genre, sort) => {
-      if (genre === '-1' || genre === undefined) {
-         axios
-            .get('/api/books/allNoPages')
-            .then((res) => {
-               this.setState({
-                  numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks
+   getPageOfBooks = (genre, sort, location) => {
+      if (location === "home") {
+         if (genre === '-1' || genre === undefined) {
+            axios
+               .get('/api/books/allNoPages')
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
                });
-               this.sortBy(sort);
-            })
-            .catch((error) => {
-               console.log(error);
-            });
-      } else {
-         axios
-            .get(`/api/books/genre/${genre}`)
-            .then((res) => {
-               this.setState({
-                  numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks
+         } else {
+            axios
+               .get(`/api/books/genre/${genre}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
                });
-               this.sortBy(sort);
-            })
-            .catch((error) => {
-               console.log(error);
-            });
+         }
+      } else if (location === "bestsellers") {
+         if (genre === '-1' || genre === undefined) {
+            axios
+               .get('/api/books/bestsellers')
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
+               });
+         } else {
+            axios
+               .get(`/api/books/bestsellers/${genre}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
+               });
+         }
       }
    };
 
@@ -79,7 +109,7 @@ class SortedCatalog extends Component {
    };
 
    componentDidMount() {
-      this.getPageOfBooks(this.props.passgenre, this.props.passsort);
+      this.getPageOfBooks(this.props.passgenre, this.props.passsort, this.props.location);
    }
 
    componentDidUpdate(prevProps) {
@@ -87,14 +117,14 @@ class SortedCatalog extends Component {
          prevProps.passgenre !== this.props.passgenre ||
          prevProps.passsort !== this.props.passsort
       ) {
-         this.getPageOfBooks(this.props.passgenre, this.props.passsort);
+         this.getPageOfBooks(this.props.passgenre, this.props.passsort, this.props.location);
       }
    }
 
    render() {
-      const { numBooks, allBooks} = this.state;
+      const { numBooks, allBooks } = this.state;
 
-      if (numBooks > 0 ) {
+      if (numBooks > 0) {
          return (
             <div>
                <div className="sorted-catalog-cards">

@@ -6,7 +6,7 @@ import Sorter from '../../components/sorter';
 const Home = (props) =>  {
     return (
       <div className="container">
-        <Sorter />
+        <Sorter location="home"/>
       </div>
     );
 }
