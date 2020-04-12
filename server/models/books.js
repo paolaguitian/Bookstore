@@ -36,6 +36,9 @@ const books = (sequelize, type) => {
         },
         publisher: {
             type: type.STRING(50)
+        },        
+        isBestseller: {
+            type: type.BOOLEAN
         }
     });
 
