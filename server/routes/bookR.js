@@ -29,6 +29,19 @@ router.get('/bestsellers', async (req, res) => {
     return res.json({ numBooks, allBooks });
 });
 
+router.get('/bestsellers/:genre', async (req, res) => {
+    const genre = req.params.genre;
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
+        where: {
+            isBestseller: 1,
+            genre: genre
+            }
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
 
 router.get('/:isbn', async (req, res) => {
     const bookID = req.params.isbn;
