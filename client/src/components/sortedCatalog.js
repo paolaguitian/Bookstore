@@ -27,7 +27,7 @@ class SortedCatalog extends Component {
       if (location === "home") {
          if (genre === '-1' || genre === undefined) {
             axios
-               .get('/api/books/allNoPages')
+               .get(`/api/books/allBooks/${rating}`)
                .then((res) => {
                   this.setState({
                      numBooks: res.data.numBooks,
@@ -40,7 +40,7 @@ class SortedCatalog extends Component {
                });
          } else {
             axios
-               .get(`/api/books/genre/${genre}`)
+               .get(`/api/books/allBooks/${genre}/${rating}`)
                .then((res) => {
                   this.setState({
                      numBooks: res.data.numBooks,
@@ -55,7 +55,7 @@ class SortedCatalog extends Component {
       } else if (location === "bestsellers") {
          if (genre === '-1' || genre === undefined) {
             axios
-               .get('/api/books/bestsellers')
+               .get(`/api/books/bestsellers/${rating}`)
                .then((res) => {
                   this.setState({
                      numBooks: res.data.numBooks,
@@ -68,7 +68,7 @@ class SortedCatalog extends Component {
                });
          } else {
             axios
-               .get(`/api/books/bestsellers/${genre}`)
+               .get(`/api/books/bestsellers/${genre}/${rating}`)
                .then((res) => {
                   this.setState({
                      numBooks: res.data.numBooks,
@@ -115,7 +115,8 @@ class SortedCatalog extends Component {
    componentDidUpdate(prevProps) {
       if (
          prevProps.genre !== this.props.genre ||
-         prevProps.sort !== this.props.sort
+         prevProps.sort !== this.props.sort  ||
+         prevProps.rating !== this.props.rating
       ) {
          this.getPageOfBooks(this.props.genre, this.props.sort, this.props.location, this.props.rating);
       }
@@ -151,7 +152,6 @@ class SortedCatalog extends Component {
                      size="large"
                      total={numBooks}
                      showSizeChanger
-                     defaultPageSize={numBooks}
                      pageSizeOptions={['15', '30', '45']}
                   />
                </div>

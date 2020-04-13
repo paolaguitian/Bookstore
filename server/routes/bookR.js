@@ -12,53 +12,6 @@ router.get('/all', async (req, res) => {
     return res.json({pager, pageOfBooks});
 });
 
-
-router.get('/allNoPages', async (req, res) => {
-    const allBooks = await req.context.models.Book.findAll();
-    const numBooks = allBooks.length;
-    return res.json({numBooks, allBooks});
-});
-
-router.get('/bestsellers', async (req, res) => {
-    const allBooks = await req.context.models.Book.findAll({
-        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
-        where: {
-            isBestseller: 1
-            }
-    });
-    const numBooks = allBooks.length;
-    return res.json({ numBooks, allBooks });
-});
-
-router.get('/rating/:rating', async (req, res) => {
-    const rating = req.params.rating;
-    const Op = Sequelize.Op;
-
-    const allBooks = await req.context.models.Book.findAll({
-        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],
-        include:
-        [{
-            model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
-        }]        
-    });
-    const numBooks = allBooks.length;
-    return res.json({ numBooks, allBooks });
-});
-
-router.get('/bestsellers/:genre', async (req, res) => {
-    const genre = req.params.genre;
-    const allBooks = await req.context.models.Book.findAll({
-        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
-        where: {
-            isBestseller: 1,
-            genre: genre
-            }
-    });
-    const numBooks = allBooks.length;
-    return res.json({ numBooks, allBooks });
-});
-
-
 router.get('/:isbn', async (req, res) => {
     const bookID = req.params.isbn;
     const book = await req.context.models.Book.findByPk(bookID);
@@ -79,13 +32,71 @@ router.get('/authorbooks/:authorID', async (req, res) => {
     return res.json({pager, pageOfBooks});
 });
 
-router.get('/genre/:genre', async (req, res) => {
+
+
+router.get('/allBooks/:rating', async (req, res) => {
+    const rating = req.params.rating;
+    const Op = Sequelize.Op;
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],
+        include:
+        [{
+            model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
+        }]        
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
+router.get('/allBooks/:genre/:rating', async (req, res) => {
+    const genre = req.params.genre;
+    const rating = req.params.rating;
+    const Op = Sequelize.Op;
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],
+        where: {
+            genre: genre
+            },
+        include:
+        [{
+            model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
+        }]
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
+router.get('/bestsellers/:rating', async (req, res) => {
+    const rating = req.params.rating;
+    const Op = Sequelize.Op;
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
+        where: {
+            isBestseller: 1
+            },
+            include:
+            [{
+                model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
+            }] 
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
+router.get('/bestsellers/:genre/:rating', async (req, res) => {
+    const rating = req.params.rating;
+    const Op = Sequelize.Op;
     const genre = req.params.genre;
     const allBooks = await req.context.models.Book.findAll({
         attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],    
         where: {
+            isBestseller: 1,
             genre: genre
-            }
+            },
+            include:
+        [{
+            model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
+        }] 
     });
     const numBooks = allBooks.length;
     return res.json({ numBooks, allBooks });

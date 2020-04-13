@@ -21,6 +21,7 @@ class Sorter extends React.Component {
   }
 
   updateRating = (e) => {
+    //console.log(typeof e);
     this.setState({ rating: e });
   }
 
@@ -80,7 +81,7 @@ class Sorter extends React.Component {
         <SortedCatalog genre={this.state.genre} 
                        sort={this.state.sortby} 
                        location={this.props.location} 
-                       rating={this.props.rating}/>
+                       rating={this.state.rating} />
       </div>
     );
   }
