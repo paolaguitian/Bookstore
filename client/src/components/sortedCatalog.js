@@ -152,6 +152,7 @@ class SortedCatalog extends Component {
                      size="large"
                      total={numBooks}
                      showSizeChanger
+                     defaultPageSize={'15'}
                      pageSizeOptions={['15', '30', '45']}
                   />
                </div>
