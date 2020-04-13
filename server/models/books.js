@@ -43,6 +43,7 @@ const books = (sequelize, type) => {
     });
 
     Book.associate = models => {
+        Book.hasMany(models.Review, {foreignKey: 'bookBookID'});
         Book.belongsTo(models.Author);
         Book.belongsToMany(models.User, { through: models.Wishlist });
         Book.belongsToMany(models.User, { through: models.Order });

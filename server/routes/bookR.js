@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import paginate from 'jw-paginate';
+import Sequelize from 'sequelize';
 const router = Router();
 
 
@@ -24,6 +25,21 @@ router.get('/bestsellers', async (req, res) => {
         where: {
             isBestseller: 1
             }
+    });
+    const numBooks = allBooks.length;
+    return res.json({ numBooks, allBooks });
+});
+
+router.get('/rating/:rating', async (req, res) => {
+    const rating = req.params.rating;
+    const Op = Sequelize.Op;
+
+    const allBooks = await req.context.models.Book.findAll({
+        attributes: ['bookID', 'title', 'bookCover', 'authorAuthorID', 'price', 'genre', 'publisher', 'releaseDate'],
+        include:
+        [{
+            model: req.context.models.Review, attributes: [], where: {rating: {[Op.gte]: rating } }
+        }]        
     });
     const numBooks = allBooks.length;
     return res.json({ numBooks, allBooks });

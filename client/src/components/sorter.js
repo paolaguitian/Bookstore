@@ -20,9 +20,8 @@ class Sorter extends React.Component {
     this.setState({ genre: e.target.value });
   }
 
-  updateRating = (e) => 
-  {
-    this.setState({ rating: e});
+  updateRating = (e) => {
+    this.setState({ rating: e });
   }
 
  handleClick =(e) =>  {
@@ -78,7 +77,10 @@ class Sorter extends React.Component {
             </Dropdown>
           </div>
         </div>
-        <SortedCatalog genre={this.state.genre} sort={this.state.sortby} location={this.props.location}/>
+        <SortedCatalog genre={this.state.genre} 
+                       sort={this.state.sortby} 
+                       location={this.props.location} 
+                       rating={this.props.rating}/>
       </div>
     );
   }
