@@ -13,6 +13,10 @@ const reviews = (sequelize, type) => {
         },
     })
 
+    Review.associate = models => {
+        Review.hasOne(models.Book, {foreignKey: 'bookID'});
+    }
+
     return Review;
 }
 

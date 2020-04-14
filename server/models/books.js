@@ -36,10 +36,14 @@ const books = (sequelize, type) => {
         },
         publisher: {
             type: type.STRING(50)
+        },        
+        isBestseller: {
+            type: type.BOOLEAN
         }
     });
 
     Book.associate = models => {
+        Book.hasMany(models.Review, {foreignKey: 'bookBookID'});
         Book.belongsTo(models.Author);
         Book.belongsToMany(models.User, { through: models.Wishlist });
         Book.belongsToMany(models.User, { through: models.Order });

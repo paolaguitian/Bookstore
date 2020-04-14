@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './views/home/home';
+import Bestsellers from './views/bestsellers/bestsellers';
 import NavBar from './components/navbar';
 import AboutUs from './views/aboutus/aboutus';
 import BookDetails from './components/bookdetails';
@@ -42,6 +43,7 @@ class App extends Component {
                   <Switch>
                      <Route path="/" exact component={Home} />
                      <Route path="/home" exact component={Home} />
+                     <Route path="/bestsellers" exact component={Bestsellers} />
                      <Route path="/shop" exact component={BookCatalog} />
                      <Route path="/about" exact component={AboutUs} />
                      <Route

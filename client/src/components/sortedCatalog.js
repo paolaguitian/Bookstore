@@ -9,8 +9,8 @@ var sortByProperty = function (property) {
       return x[property] === y[property]
          ? 0
          : x[property] > y[property]
-         ? 1
-         : -1;
+            ? 1
+            : -1;
    };
 };
 
@@ -19,41 +19,67 @@ class SortedCatalog extends Component {
       super(props);
       this.state = {
          numBooks: -1,
-         allBooks: [],
-         sort: 'title descending',
-         loading: true,
+         allBooks: []
       };
    }
 
-   getPageOfBooks = (genre, sort) => {
-      if (genre === '-1' || genre === undefined) {
-         axios
-            .get('/api/books/allNoPages')
-            .then((res) => {
-               this.setState({
-                  numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks,
-                  loading: false,
+   getPageOfBooks = (genre, sort, location, rating) => {
+      if (location === "home") {
+         if (genre === '-1' || genre === undefined) {
+            axios
+               .get(`/api/books/allBooks/${rating}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
                });
-               this.sortBy(sort);
-            })
-            .catch((error) => {
-               console.log(error);
-            });
-      } else {
-         axios
-            .get(`/api/books/genre/${genre}`)
-            .then((res) => {
-               this.setState({
-                  numBooks: res.data.numBooks,
-                  allBooks: res.data.allBooks,
-                  loading: false,
+         } else {
+            axios
+               .get(`/api/books/allBooks/${genre}/${rating}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
                });
-               this.sortBy(sort);
-            })
-            .catch((error) => {
-               console.log(error);
-            });
+         }
+      } else if (location === "bestsellers") {
+         if (genre === '-1' || genre === undefined) {
+            axios
+               .get(`/api/books/bestsellers/${rating}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
+               });
+         } else {
+            axios
+               .get(`/api/books/bestsellers/${genre}/${rating}`)
+               .then((res) => {
+                  this.setState({
+                     numBooks: res.data.numBooks,
+                     allBooks: res.data.allBooks
+                  });
+                  this.sortBy(sort);
+               })
+               .catch((error) => {
+                  console.log(error);
+               });
+         }
       }
    };
 
@@ -83,22 +109,23 @@ class SortedCatalog extends Component {
    };
 
    componentDidMount() {
-      this.getPageOfBooks(this.props.passgenre, this.props.passsort);
+      this.getPageOfBooks(this.props.genre, this.props.sort, this.props.location, this.props.rating);
    }
 
    componentDidUpdate(prevProps) {
       if (
-         prevProps.passgenre !== this.props.passgenre ||
-         prevProps.passsort !== this.props.passsort
+         prevProps.genre !== this.props.genre ||
+         prevProps.sort !== this.props.sort  ||
+         prevProps.rating !== this.props.rating
       ) {
-         this.getPageOfBooks(this.props.passgenre, this.props.passsort);
+         this.getPageOfBooks(this.props.genre, this.props.sort, this.props.location, this.props.rating);
       }
    }
 
    render() {
-      const { numBooks, allBooks, loading } = this.state;
+      const { numBooks, allBooks } = this.state;
 
-      if (numBooks > 0 && loading === false) {
+      if (numBooks > 0) {
          return (
             <div>
                <div className="sorted-catalog-cards">
@@ -125,19 +152,14 @@ class SortedCatalog extends Component {
                      size="large"
                      total={numBooks}
                      showSizeChanger
-                     defaultPageSize={numBooks}
+                     defaultPageSize={'15'}
                      pageSizeOptions={['15', '30', '45']}
                   />
                </div>
             </div>
          );
-      } else if (loading === true) {
-         return (
-            <div className="sorted-catalog-container">
-               <div className="sorted-catalog-cards"></div>
-            </div>
-         );
       }
+      else { return (<div></div>); }
    }
 }
 

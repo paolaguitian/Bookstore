@@ -1,15 +1,15 @@
 import React from 'react';
-import './home.css';
+import './bestsellers.css';
 import Sorter from '../../components/sorter';
 
 
-const Home = (props) =>  {
+const Bestsellers = (props) =>  {
     return (
       <div className="container">
-        <Sorter location="home"/>
+        <Sorter location="bestsellers"/>
       </div>
     );
 }
 
 
-export default Home;
+export default Bestsellers;
