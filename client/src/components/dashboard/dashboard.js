@@ -4,45 +4,29 @@ import UserContext from '../../context';
 import { Form, Input, Button } from 'antd';
 import ExtraField from './extraField';
 import axios from 'axios';
-import isEmpty from 'lodash';
-
+import AddCreditCards from '../creditCard/creditCard'
 
 const DashboardForm = (props) => {
   const { getFieldDecorator } = props.form;
   const userState = useContext(UserContext);
   const user = userState.state.user;
   const [dirty, setDirty] = useState(false)
+  const [extraField, setExtraField] = useState([]);
 
 
   const handleSubmit = (e, setState) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
-      const userID = user.userID
-      values = {...values, userID}
-      const updatedValues = {};
 
       if(dirty) {
-        if (values.shippingAddress1) {
-          axios.post('api/user/create/ship', values)
-          .then((res) => {
-            console.log(res.data)
-            updatedValues = {...updatedValues, shippingAddress1: res.data.street}
-          })
-          .catch((err) =>{
-            console.log("Could not update Ship")
-          })
+        values = {...values, userID: user.userID}
+        if (extraField.length > 0) {
+          values = {...values, creditCards: extraField, userID: user.userID}
         }
-        if (values.creditCard) {
-          axios.post('api/user/create/card', values)
-          .then((res) => {
-            updatedValues = {...updatedValues, creditCard: res.data.cardNumber}
-            console.log(updatedValues)
-          })
-          .catch((err) =>{
-            console.log(updatedValues)
-          })
-        }
-
+        localStorage.setItem('user', JSON.stringify(values))
+        setState({
+          user: JSON.parse(localStorage.getItem('user')),
+        });
       }
 
     });
@@ -63,7 +47,7 @@ const DashboardForm = (props) => {
     return (
       <Form.Item label="First Name">
         {getFieldDecorator('firstname', {
-          initialValue: user.firstName,
+          initialValue: user.firstname,
           rules: [
             {
               required: true,
@@ -79,7 +63,7 @@ const DashboardForm = (props) => {
     return (
       <Form.Item label="Last Name">
         {getFieldDecorator('lastname', {
-          initialValue: user.lastName,
+          initialValue: user.lastname,
           rules: [
             {
               required: true,
@@ -123,11 +107,26 @@ const DashboardForm = (props) => {
     )
   }
 
+    const renderHomeAddress = () => {
+    return (
+      <Form.Item label="Home Address">
+        {getFieldDecorator('homeAddress', {
+          initialValue: user.homeAddress,
+          rules: [
+            {
+              required: true,
+              message: 'Please input your Phone Number!'
+            },
+          ],
+        })(<Input onChange={() => setDirty(true)} />)}
+      </Form.Item>
+    )
+  }
   return (
     <UserContext.Consumer>
       {({setState}) => (
     <div className="profile-container">
-    <h1>{`${user.firstName}'s Profile`}</h1>
+    <h1>{`${user.firstname}'s Profile`}</h1>
     <Form
       className="form-section"
       onSubmit={(e) => handleSubmit(e, setState)}
@@ -140,20 +139,20 @@ const DashboardForm = (props) => {
       <div className="input-row">
         {renderEmail()}
         {renderPhoneNumber()}
+        {renderHomeAddress()}
       </div>
-      <ExtraField
-        diffInitValue='homeAddress'
-        name='Shipping Address'
-        field='shippingAddress'
-        getFieldDecorator={getFieldDecorator}
+      <AddCreditCards
+        user={user}
+        setExtraField={setExtraField}
         setDirty={setDirty}
       />
-      <ExtraField
-        name='Credit Card'
-        field='creditCard'
+      {user.creditCards ?
+       <ExtraField
+        field={user.creditCards}
         getFieldDecorator={getFieldDecorator}
-        setDirty={setDirty}
-      />
+      /> : null
+      }
+      <h3>+ Add Shipping Addresses</h3>
       <Form.Item>
         <Button type="primary" htmlType="submit" disabled={!dirty}>
           Update

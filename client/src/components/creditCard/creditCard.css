@@ -1,0 +1,8 @@
+.credit-card-modal-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.secondary-info {
+  display: flex;
+}

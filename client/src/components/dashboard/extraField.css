@@ -1,0 +1,8 @@
+.extraField {
+  display: flex;
+  flex-direction: column;
+}
+
+.minorInfo {
+  display: flex;
+}

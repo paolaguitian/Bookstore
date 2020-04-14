@@ -88,21 +88,27 @@ router.post('/create', async(req, res) => {
 
   router.post('/create/card', async(req, res) => {
     const creditModel = req.context.models.CreditCard;
-    const { creditCard, userID } = req.body;
+    const { number, cvc, expDate, userID } = req.body;
 
-    const [card, created] = await creditModel.findOrCreate({
-      where: {userUserID: userID},
-      defaults: {
-        cardNumber: creditCard,
-        cvc: ' ',
-        expDate: ' ',
-      }
-    });
+    const created = await creditModel.create({
+      userUserID: userID,
+      cardNumber: number,
+      cvc: cvc,
+      expDate: expDate,
+    })
 
     if (created) {
-      return res.status(200).json(card);
+      await creditModel.findAll({
+        attributes: ['cardNumber', 'cvc', 'expDate'],
+        where: { userUserID: userID },
+      }).then(cards => {
+        console.log(cards)
+        return res.status(200).json(cards);
+      }).catch(err => {
+        res.status(400).json("Unable to Retrieve All Card, Try Again Later")
+      })
     } else
-      res.status(400).json("Unable to Save Address")
+    res.status(400).json("Unable to Save Card")
   });
 
 
