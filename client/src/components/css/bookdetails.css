@@ -23,6 +23,12 @@
    float: left;
 }
 
+.commentList {
+   text-align: left;
+   margin-left: 20%;
+   margin-right: 20%;
+}
+
 @media only screen and (max-width: 800px) {
    .bookDetails {
       width: 95%;
@@ -56,6 +62,11 @@
       float: right;
       align-self: flex-end;
    }
+   .commentList {
+      text-align: left;
+      margin-left: auto;
+      margin-right: auto;
+   }
 }
 
 @media only screen and (max-width: 1200px) {
@@ -82,6 +93,11 @@
 
    .outOfStockStatus {
       color: red;
+   }
+   .commentList {
+      text-align: left;
+      margin-left: 13%;
+      margin-right: 13%;
    }
 }
 
